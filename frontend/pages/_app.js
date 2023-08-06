@@ -1,4 +1,5 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { AppProvider } from "@/context/AppContext";
 import "@/styles/globals.css";
 import Layout from "@/components/Layout";
 
@@ -20,9 +21,11 @@ export const client = new ApolloClient({
 export default function App({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+       <AppProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+       </AppProvider>
     </ApolloProvider>
   );
 }

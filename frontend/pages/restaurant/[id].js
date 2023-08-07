@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { centsToDollars } from "@/utils/centsToDollars";
 import { useRouter } from "next/router";
+import { useAppContext } from "@/context/AppContext";
 
 import Image from "next/image";
 import Loader from "@/components/Loader";
@@ -18,7 +19,7 @@ query ($id: ID!) {
               attributes {
                 name
                 description
-                price
+                priceInCents:price
                 image {
                   data {
                     attributes {
@@ -36,9 +37,12 @@ query ($id: ID!) {
 `;
 
 function DishCard({ data }) {
-  function handleAddItem() {
-    // will add some logic here
-  }
+    const { addItem, setShowCart } = useAppContext();
+    function handleAddItem() {
+      addItem(data);
+      setShowCart(true);
+    }
+  
 
   return (
     <div className="w-full md:w-1/2 lg:w-1/3 p-4">

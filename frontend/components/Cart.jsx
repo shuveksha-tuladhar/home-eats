@@ -2,12 +2,16 @@ import { useAppContext } from "@/context/AppContext";
 import { useRouter } from "next/router";
 import { centsToDollars } from "@/utils/centsToDollars";
 import CartItem from "./CartItem";
+import { useInitialRender } from "@/utils/useInitialRender";
 
 export default function Cart() {
   const router = useRouter();
   const { user, cart, showCart, setShowCart } = useAppContext();
   const total = cart.total;
   const displayTotal = Math.abs(total);
+
+  const initialRender = useInitialRender();
+  if (!initialRender) return null;
 
   function loginRedirect() {
     router.push("/login");

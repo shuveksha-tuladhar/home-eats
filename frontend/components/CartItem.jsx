@@ -1,9 +1,13 @@
 import { useAppContext } from "@/context/AppContext";
 import { centsToDollars } from "@/utils/centsToDollars";
+import { useInitialRender } from "@/utils/useInitialRender";
 
 export default function CartItem({ data }) {
   const { addItem, removeItem } = useAppContext();
   const { quantity, attributes } = data;
+
+  const initialRender = useInitialRender();
+  if (!initialRender) return null;
 
   return (
     <div className="p-6 flex flex-wrap justify-between border-b border-blueGray-800">

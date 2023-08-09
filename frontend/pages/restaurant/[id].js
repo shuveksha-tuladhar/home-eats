@@ -39,7 +39,7 @@ query ($id: ID!) {
 function DishCard({ data }) {
     const { addItem, setShowCart } = useAppContext();
     function handleAddItem() {
-      addItem(data);
+       addItem(data);
       setShowCart(true);
     }
   
@@ -61,7 +61,7 @@ function DishCard({ data }) {
             <h3 className="font-heading text-xl text-gray-900 hover:text-gray-700 group-hover:underline font-black">
               {data.attributes.name}
             </h3>
-            <h2>${centsToDollars(data.attributes.price)}</h2>
+            <h2>${centsToDollars(data.attributes.priceInCents)}</h2>
           </div>
           <p className="text-sm text-gray-500 font-bold">
             {data.attributes.description}

@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.17",
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^1.54.2",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
     "graphql": "^16.7.1",

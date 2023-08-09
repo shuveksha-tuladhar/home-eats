@@ -1,10 +1,9 @@
 import { useAppContext } from "@/context/AppContext";
 import { centsToDollars } from "@/utils/centsToDollars";
 
-export default function CartItem({ data }) {
+function CartItem({ data }) {
   const { addItem, removeItem } = useAppContext();
   const { quantity, attributes } = data;
-
   return (
     <div className="p-6 flex flex-wrap justify-between border-b border-blueGray-800">
       <div className="w-2/4">
@@ -34,6 +33,40 @@ export default function CartItem({ data }) {
           <span className="block mt-2 text-sm font-bold text-white">
             ${centsToDollars(attributes.priceInCents * quantity)}
           </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function CheckoutCart() {
+  const { cart } = useAppContext();
+  const total = cart.total;
+  const displayTotal = Math.abs(total);
+
+  return (
+    <div className="rounded-2xl co bg-gray-800">
+      <div className="max-w-lg pt-6 pb-8 px-8 mx-auto bg-blueGray-900">
+        <div className="flex mb-10 items-center justify-between">
+          <h6 className="font-bold text-2xl text-white mb-0">Your Cart</h6>
+        </div>
+
+        <div>
+          {cart.items
+            ? cart.items.map((item, index) => {
+                if (item.quantity > 0) {
+                  return <CartItem key={index} data={item} />;
+                }
+              })
+            : null}
+        </div>
+        <div className="p-6">
+          <div className="flex mb-6 content-center justify-between">
+            <span className="font-bold text-white">Order total</span>
+            <span className="text-sm font-bold text-white">
+              ${centsToDollars(displayTotal)}
+            </span>
+          </div>
         </div>
       </div>
     </div>

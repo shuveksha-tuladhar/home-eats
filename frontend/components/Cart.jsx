@@ -8,7 +8,6 @@ export default function Cart() {
   const { user, cart, showCart, setShowCart } = useAppContext();
   const total = cart.total;
   const displayTotal = Math.abs(total);
-  console.log("total:", displayTotal);
 
   function loginRedirect() {
     router.push("/login");
@@ -18,7 +17,6 @@ export default function Cart() {
     setShowCart(false);
     router.push("/checkout");
   }
-  console.log("cart", cart)
 
   return (
     <section className="fixed right-20 top-[242px]">

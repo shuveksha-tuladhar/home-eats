@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import { useAppContext } from "@/context/AppContext";
 import Cookie from "js-cookie";
 
-const Cart = dynamic(() => import("@/components/Cart"), { ssr: false });
+
 
 import Head from "next/head";
 import Link from "next/link";
+import Cart from "./Cart";
 
 function Navigation() {
     const { user, setUser } = useAppContext();
@@ -27,7 +28,7 @@ function Navigation() {
                     className="block text-2xl max-w-max text-white font-medium"
                     href="/"
                 >
-                    Food Order App
+                    HomeEats
                 </Link>
                 </div>
 

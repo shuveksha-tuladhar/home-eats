@@ -1,0 +1,46 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 5px 10px;
+    padding-right: 40px;
+    background-color: rgba(0, 0, 0, 0); /* Set the background color with alpha transparency */
+    color: white;
+    z-index: 999;
+  }
+
+  .navbar.scrolled {
+    background-color: black;
+    box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.2);
+    color:#fff
+  }
+
+  .navbar_branding {
+    display: flex;
+    align-items: left;
+    cursor: pointer;
+  }
+
+  .navbar_menu {
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    color: white;
+  }
+
+  .menus_list {
+    display: flex;
+    gap: 25px;
+  }
+  .navbar_button_icon {
+    margin-right: 0px; /* Adjust the spacing between the icon and text if needed */
+    display: inline-flex;
+    padding-top: 0px;
+  }
+  .navbar.button_black {
+    color: black;
+  }
+  

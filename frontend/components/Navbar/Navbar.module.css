@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    height: 80px;
     padding: 5px 10px;
     padding-right: 40px;
     background-color: rgba(0, 0, 0, 0); /* Set the background color with alpha transparency */
@@ -13,14 +13,15 @@
   }
 
   .navbar.scrolled {
-    background-color: black;
+    background-color: #0A6522;
     box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.2);
     color:#fff
   }
 
   .navbar_branding {
     display: flex;
-    align-items: left;
+
+    align-items: center;
     cursor: pointer;
   }
 
@@ -43,4 +44,7 @@
   .navbar.button_black {
     color: black;
   }
-  
+  .navbar_button_login {
+    display: flex;
+    align-items: center;
+  }

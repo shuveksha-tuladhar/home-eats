@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.17",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.3",
+    "@mui/material": "^5.14.5",
     "@stripe/react-stripe-js": "^2.1.1",
     "@stripe/stripe-js": "^1.54.2",
     "eslint": "8.46.0",

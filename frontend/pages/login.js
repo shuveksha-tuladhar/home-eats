@@ -38,6 +38,19 @@ export default function LoginRoute() {
     }
   };
 
+  const handleDemoLogin = async () => {
+    const email = "test@test.com";
+    const password = "test1234";
+    const { data } = await loginMutation({
+      variables: { identifier: email, password },
+    });
+    if (data?.login.user) {
+      setUser(data.login.user);
+      Cookie.set("token", data.login.jwt);
+      router.push("/");
+    }
+  }
+
   if (loading) return <Loader />;
 
   return (
@@ -48,6 +61,7 @@ export default function LoginRoute() {
       setFormData={setFormData}
       callback={handleLogin}
       error={error}
+      demoClick={handleDemoLogin}
     />
   );
 }

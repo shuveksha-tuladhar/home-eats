@@ -12,7 +12,7 @@ export const AppProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [showCart, setShowCart] = useState(true);
     const [cart, setCart] = useState(
-    cartCookie ? JSON.parse(cartCookie) : { items: [], total: 0 }
+    cartCookie ? JSON.parse(cartCookie) : { items: [], total: 0, quantity: 0 }
     );
 
   useEffect(() => {

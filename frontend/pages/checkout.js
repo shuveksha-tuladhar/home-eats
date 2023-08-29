@@ -1,11 +1,13 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { useAppContext } from "@/context/AppContext";
 import { useInitialRender } from "@/utils/useInitialRender";
-import CheckoutForm from "@/components/CheckoutForm";
-import CheckoutCart from "@/components/CheckoutCart";
+import CheckoutForm from "@/components/Checkout/CheckoutForm";
+import CheckoutCart from "@/components/Checkout/CheckoutCart";
 const stripePromise = loadStripe(process.env.STRIPE_PKEY);
 
 export default function Checkout() {
+
   const initialRender = useInitialRender();
   if (!initialRender) return null;
 

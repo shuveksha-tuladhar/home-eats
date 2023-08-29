@@ -142,6 +142,21 @@ export default function CheckoutForm() {
         <hr className="my-4" />
         <div className="flex mb-6">
           <div className="flex-1">
+          <label
+              className="block mb-2 test-gray-800 font-medium"
+              htmlFor="address"
+            >
+              Name
+            </label>
+            <input
+              id="name"
+              htmlFor="name"
+              className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+              type="text"
+              name="name"
+              onChange={onChange}
+              placeholder="Enter your full name"
+            />
             <label
               className="block mb-2 test-gray-800 font-medium"
               htmlFor="address"
@@ -199,7 +214,7 @@ export default function CheckoutForm() {
               <CardElement options={options} />
             </div>
             <button
-              className="inline-block w-full px-6 py-3 text-center font-bold text-white bg-green-500 hover:bg-green-600 transition duration-200 rounded-full"
+              className="inline-block w-full px-6 py-3 text-center font-bold text-white bg-green-700 hover:bg-green-600 transition duration-200 rounded-full"
               onClick={(e) => (user ? submitOrder(e) : router.push("/login"))}
               disabled={loading}
             >

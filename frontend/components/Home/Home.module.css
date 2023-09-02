@@ -1,8 +1,10 @@
 .home_bg {
-    background: url("../../public/food-bg.jpg") center  no-repeat ;
+    background: url("../../public/bg-home-pic.webp") center  no-repeat ;
+    /* background: linear-gradient(rgba(251, 251, 241, 0.4), rgba(178, 169, 70, 0.4)), url("../../public/bg-home-pic.webp") center  no-repeat; */
     height: 100vh;
     background-size: cover;
     margin-top: -105px;
     padding-top: 140px;
     /* width: 100%; */
+    position: relative;
 }

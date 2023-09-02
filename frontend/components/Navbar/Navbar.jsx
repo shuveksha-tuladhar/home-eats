@@ -8,7 +8,7 @@ import Leftbar from "../Leftbar/Leftbar";
 
 export default function Navbar() {
   const [scrollTop, setScrollTop] = useState(true);
-  const { user, setUser } = useAppContext();
+  const { user, setUser, resetCart } = useAppContext();
   useEffect(() => {
     const handleScroll = () => {
       const scrollYPosition = window.scrollY;
@@ -26,6 +26,7 @@ export default function Navbar() {
 
   const handleSignOut = () => {
     setUser(''); // Clear the current user
+    resetCart();
   };
 
   return (

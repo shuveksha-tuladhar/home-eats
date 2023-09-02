@@ -89,7 +89,7 @@ export default function Layout(props) {
       <Navbar />
       {/* <Navigation /> */}
       <main>{props.children}</main>
-      <div><Footer/></div>
+      <Footer/>
     </div>
   );
 }

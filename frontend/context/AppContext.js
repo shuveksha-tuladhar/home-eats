@@ -10,9 +10,9 @@ export const AppProvider = ({ children }) => {
         Cookie.get("cart") !== "undefined" ? Cookie.get("cart") : null;
 
     const [user, setUser] = useState(null);
-    const [showCart, setShowCart] = useState(true);
+   
     const [cart, setCart] = useState(
-    cartCookie ? JSON.parse(cartCookie) : { items: [], total: 0, quantity: 0 }
+    cartCookie ? JSON.parse(cartCookie) : { items: [], total: 0, totalCartQuantity: 0 }
     );
 
   useEffect(() => {
@@ -36,6 +36,7 @@ export const AppProvider = ({ children }) => {
       };
       setCart((prevCart) => ({
         items: [...prevCart.items, newItem],
+        totalCartQuantity: prevCart.totalCartQuantity + 1,
         total: prevCart.total + item.attributes.priceInCents,
       }));
     } else {
@@ -43,6 +44,7 @@ export const AppProvider = ({ children }) => {
         items: prevCart.items.map((i) =>
           i.id === newItem.id ? { ...i, quantity: i.quantity + 1 } : i
         ),
+        totalCartQuantity: prevCart.totalCartQuantity + 1,
         total: prevCart.total + item.attributes.priceInCents,
       }));
     }
@@ -55,18 +57,20 @@ export const AppProvider = ({ children }) => {
         items: prevCart.items.map((i) =>
           i.id === newItem.id ? { ...i, quantity: i.quantity - 1 } : i
         ),
+        totalCartQuantity: prevCart.totalCartQuantity - 1,
         total: prevCart.total - item.attributes.priceInCents,
       }));
     } else {
       setCart((prevCart) => ({
         items: prevCart.items.filter((i) => i.id !== item.id),
+        totalCartQuantity: prevCart.totalCartQuantity - 1,
         total: prevCart.total - item.attributes.priceInCents,
       }));
     }
   };
 
   const resetCart = () => {
-    setCart({ items: [], total: 0 });
+    setCart({ items: [], total: 0, totalCartQuantity:0 });
   };
 
   return (
@@ -78,8 +82,6 @@ export const AppProvider = ({ children }) => {
         addItem,
         removeItem,
         resetCart,
-        showCart,
-        setShowCart,
       }}
     >
       {children}

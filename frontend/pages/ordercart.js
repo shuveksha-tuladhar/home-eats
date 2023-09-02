@@ -18,16 +18,18 @@ export default function OrderCart () {
       }
 
     return (
-        <div>
-            <h1> Your Cart</h1>
+        <div className="w-1/3 mx-auto py-12">
+            <div className="bg-[#fffbdb] p-4 rounded">
+
+            <h1 className="text-xl font-semibold text-center"> Your Cart</h1>
             {
                 cart.items.map(item => 
                     <CartItem data={item} />)
             }
             <div className="p-6">
                 <div className="flex mb-6 content-center justify-between">
-                  <span className="font-bold text-black">Order total</span>
-                  <span className="text-sm font-bold text-black">
+                  <span className="font-semibold text-black text-lg">Order total</span>
+                  <span className="text-xl font-bold text-black">
                     ${centsToDollars(displayTotal)}
                   </span>
                 </div>
@@ -38,6 +40,7 @@ export default function OrderCart () {
                  Continue To Pay
                 </button>
           </div>
+                </div>
         </div>
     );
 }

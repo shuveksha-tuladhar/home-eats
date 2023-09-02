@@ -5,7 +5,7 @@ import { useInitialRender } from "@/utils/useInitialRender";
 
 export default function Cart() {
   const router = useRouter();
-  const { user } = useAppContext();
+  const { user, cart } = useAppContext();
 
   const initialRender = useInitialRender();
   if (!initialRender) return null;
@@ -40,6 +40,7 @@ export default function Cart() {
               strokeLinejoin="round"
             ></path>
           </svg>
+          {cart.totalCartQuantity}
         </button>
       </>
   );

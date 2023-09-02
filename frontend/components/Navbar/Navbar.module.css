@@ -13,7 +13,9 @@
   }
 
   .navbar.scrolled {
-    background-color: #0A6522;
+    /* background-color: #0A6522; */
+    background-image: linear-gradient(to top, #379237, #308031, #2a6f2a, #245e24, #1e4d1e);
+ 
     box-shadow: 0 2px 5px 2px rgba(0, 0, 0, 0.2);
     color:#fff
   }

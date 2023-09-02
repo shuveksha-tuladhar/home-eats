@@ -23,7 +23,7 @@ export default function Cart() {
     
     <button
           onClick={() => (user ? cartItemRedirect() : loginRedirect())}
-          className="z-10 bg-green-500 text-white p-3 rounded-full hover:bg-yellow-500 items-center"
+          className="z-10 bg-green-500 text-white p-3 rounded-full hover:bg-yellow-500 flex items-center"
         >
           <svg
             width="20"
@@ -40,7 +40,8 @@ export default function Cart() {
               strokeLinejoin="round"
             ></path>
           </svg>
-          {cart.totalCartQuantity}
+          <span className="ml-2">{cart.totalCartQuantity}</span>
+  
         </button>
       </>
   );

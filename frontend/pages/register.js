@@ -4,8 +4,9 @@ import { useAppContext } from "@/context/AppContext";
 import { gql, useMutation } from "@apollo/client";
 import Cookie from "js-cookie";
 
-import Form from "@/components/Form";
+import Form from "@/components/Form/Form";
 import Loader from "@/components/Loader";
+import styles from "@/components/Form/Form.module.css";
 
 const REGISTER_MUTATION = gql`
   mutation Register($username: String!, $email: String!, $password: String!) {
@@ -43,7 +44,8 @@ export default function RegisterRoute() {
   if (loading) return <Loader />;
 
   return (
-    <Form
+    <section className={`${styles.form_user_signup_image} inline-flex items-center justify-center w-full`}>
+      <Form
       title="Sign Up"
       buttonText="Sign Up"
       formData={formData}
@@ -51,5 +53,7 @@ export default function RegisterRoute() {
       callback={handleRegister}
       error={error}
     />
+        </section>
+    
   );
 }

@@ -10,7 +10,7 @@ export default function Form({
   demoClick,
 }) {
   return (
-    <section className="py-24 md:py-32 bg-white">
+    <section className="py-8 rounded-lg bg-white inline-block w-1/3">
       <div className="container px-4 mx-auto">
         <div className="max-w-sm mx-auto">
           <div className="mb-6 text-center">

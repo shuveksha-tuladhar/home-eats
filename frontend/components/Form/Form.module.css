@@ -1,0 +1,19 @@
+.form_user_signup_image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.479), rgba(0, 0, 0, 0.445)),
+      url("../../public/user-signup-image.webp");
+    height: 100vh;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+
+.form_user_login_image{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.479), rgba(0, 0, 0, 0.445)),
+      url("../../public/user-login-image.jpg");
+    height: 100vh;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }

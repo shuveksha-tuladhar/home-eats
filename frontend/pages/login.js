@@ -4,8 +4,9 @@ import { useAppContext } from "@/context/AppContext";
 import { gql, useMutation } from "@apollo/client";
 import Cookie from "js-cookie";
 
-import Form from "@/components/Form";
+import Form from "@/components/Form/Form";
 import Loader from "@/components/Loader";
+import styles from "@/components/Form/Form.module.css";
 
 const LOGIN_MUTATION = gql`
   mutation Login($identifier: String!, $password: String!) {
@@ -54,14 +55,16 @@ export default function LoginRoute() {
   if (loading) return <Loader />;
 
   return (
-    <Form
-      title="Login"
-      buttonText="Login"
-      formData={formData}
-      setFormData={setFormData}
-      callback={handleLogin}
-      error={error}
-      demoClick={handleDemoLogin}
-    />
+    <section className={`${styles.form_user_login_image} inline-flex items-center justify-center w-full`}>
+      <Form
+        title="Login"
+        buttonText="Login"
+        formData={formData}
+        setFormData={setFormData}
+        callback={handleLogin}
+        error={error}
+        demoClick={handleDemoLogin}
+      />
+      </section>
   );
 }

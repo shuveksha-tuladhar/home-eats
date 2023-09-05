@@ -4,7 +4,8 @@ import { useAppContext } from "@/context/AppContext";
 import { useInitialRender } from "@/utils/useInitialRender";
 import CheckoutForm from "@/components/Checkout/CheckoutForm";
 import CheckoutCart from "@/components/Checkout/CheckoutCart";
-const stripePromise = loadStripe(process.env.STRIPE_PKEY);
+console.log('stripe key:', process.env.NEXT_PUBLIC_STRIPE_PKEY);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PKEY);
 
 export default function Checkout() {
 

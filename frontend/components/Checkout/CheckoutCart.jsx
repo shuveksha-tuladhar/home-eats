@@ -8,10 +8,10 @@ export default function CheckoutCart() {
   const displayTotal = Math.abs(total);
 
   return (
-    <div className="rounded-2xl co bg-green-700">
+    <div className="rounded co bg-[#fffbdb] p-4">
       <div className="max-w-lg pt-6 pb-8 px-8 mx-auto bg-blueGray-900">
         <div className="flex mb-10 items-center justify-between">
-          <h6 className="font-bold text-2xl text-white mb-0">Your Cart</h6>
+          <h6 className="font-bold text-2xl mb-0">Your Cart</h6>
         </div>
 
         <div>
@@ -25,8 +25,8 @@ export default function CheckoutCart() {
         </div>
         <div className="p-6">
           <div className="flex mb-6 content-center justify-between">
-            <span className="font-bold text-white">Order total</span>
-            <span className="text-sm font-bold text-white">
+            <span className="font-bold">Order total</span>
+            <span className="text-sm font-bold">
               ${centsToDollars(displayTotal)}
             </span>
           </div>

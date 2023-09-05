@@ -2,13 +2,23 @@ import React, { useState } from "react";
 import Cookie from "js-cookie";
 import { client } from "@/pages/_app.js";
 import { gql } from "@apollo/client";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import {
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
 import { useAppContext } from "@/context/AppContext";
 import { useRouter } from "next/router";
 import { useInitialRender } from "@/utils/useInitialRender";
 
 const options = {
-  style: {
+  layout: {
+    type: "tabs",
+    defaultCollapsed: false,
+  },
+  cardStyle: {
     base: {
       fontSize: "32px",
       color: "#52a635",
@@ -32,8 +42,7 @@ const INITIAL_STATE = {
 export default function CheckoutForm() {
   const [data, setData] = useState(INITIAL_STATE);
   const [loading, setLoading] = useState(false);
-  const { user, cart, resetCart, setShowCart } = useAppContext();
-
+  const { user, cart, resetCart } = useAppContext();
   const initialRender = useInitialRender();
 
   const stripe = useStripe();
@@ -50,7 +59,7 @@ export default function CheckoutForm() {
   async function submitOrder(e) {
     e.preventDefault();
     const cardElement = elements.getElement(CardElement);
-    const token = await stripe.createToken(cardElement);
+    const stripeToken = await stripe.createToken(cardElement);
 
     if (data.address === "") {
       setData({ ...data, error: { message: "Address is required" } });
@@ -112,7 +121,7 @@ export default function CheckoutForm() {
           address: data.address,
           city: data.city,
           state: data.state,
-          token: token.token.id,
+          chargeToken: stripeToken.token.id,
         },
         context: {
           headers: {
@@ -125,7 +134,6 @@ export default function CheckoutForm() {
         alert("Transaction Successful, continue your shopping");
         setData(INITIAL_STATE);
         resetCart();
-        setShowCart(true);
         router.push("/");
       }
     } catch (error) {
@@ -140,41 +148,45 @@ export default function CheckoutForm() {
       <div className="bg-white shadow-md rounded-lg p-8">
         <h5 className="text-lg font-semibold">Your information:</h5>
         <hr className="my-4" />
-        <div className="flex mb-6">
+        <div className="flex">
           <div className="flex-1">
-          <label
-              className="block mb-2 test-gray-800 font-medium"
-              htmlFor="address"
-            >
-              Name
-            </label>
-            <input
-              id="name"
-              htmlFor="name"
-              className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-              type="text"
-              name="name"
-              onChange={onChange}
-              placeholder="Enter your full name"
-            />
-            <label
-              className="block mb-2 test-gray-800 font-medium"
-              htmlFor="address"
-            >
-              Address
-            </label>
-            <input
-              id="address"
-              htmlFor="address"
-              className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-              type="text"
-              name="address"
-              onChange={onChange}
-              placeholder="Enter your address"
-            />
+            <div className="mb-4">
+              <label
+                className="block mb-2 test-gray-800 font-medium"
+                htmlFor="information"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                htmlFor="name"
+                className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                type="text"
+                name="name"
+                onChange={onChange}
+                placeholder="Enter your full name"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block mb-2 test-gray-800 font-medium"
+                htmlFor="address"
+              >
+                Address
+              </label>
+              <input
+                id="address"
+                htmlFor="address"
+                className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                type="text"
+                name="address"
+                onChange={onChange}
+                placeholder="Enter your address"
+              />
+            </div>
           </div>
         </div>
-        <div className="flex mb-6">
+        <div className="flex mb-4">
           <div className="flex-1 mr-6">
             <label
               htmlFor="city"
@@ -208,10 +220,53 @@ export default function CheckoutForm() {
           </div>
         </div>
         {cart.items.length > 0 ? (
-          <div className="p-6">
-            <div>Credit or debit card</div>
-            <div className="my-4">
-              <CardElement options={options} />
+          <div>
+            <h5 className="text-lg font-semibold">Card information:</h5>
+            <div className="my-4 w-full">
+              {/* <CardElement
+                id="card-element"
+                className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                options={options}
+              /> */}
+              <div className="mb-4 w-full">
+                <label
+                  className="block mb-2 test-gray-800 font-medium"
+                  htmlFor="address"
+                >
+                  Card Number
+                </label>
+                <CardNumberElement
+                  className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                  options={options}
+                />
+              </div>
+
+              <div className="flex gap-5 mb-4 w-full">
+                <div className="w-full">
+                  <label
+                    className="block mb-2 test-gray-800 font-medium"
+                    htmlFor="address"
+                  >
+                    Month/Year
+                  </label>
+                  <CardExpiryElement
+                    className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                    options={options}
+                  />
+                </div>
+                <div className="w-full">
+                  <label
+                    className="block mb-2 test-gray-800 font-medium"
+                    htmlFor="address"
+                  >
+                    Month/Year
+                  </label>
+                  <CardCvcElement
+                    className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                    options={options}
+                  />
+                </div>
+              </div>
             </div>
             <button
               className="inline-block w-full px-6 py-3 text-center font-bold text-white bg-green-700 hover:bg-green-600 transition duration-200 rounded-full"

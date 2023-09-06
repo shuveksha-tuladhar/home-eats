@@ -33,6 +33,7 @@ const options = {
 };
 
 const INITIAL_STATE = {
+  name: "",
   address: "",
   city: "",
   state: "",
@@ -58,10 +59,16 @@ export default function CheckoutForm() {
 
   async function submitOrder(e) {
     e.preventDefault();
-    const cardElement = elements.getElement(CardElement);
-    const stripeToken = await stripe.createToken(cardElement);
+   
+    const cardNumberElement = elements.getElement(CardNumberElement);
+    const stripeToken = await stripe.createToken(CardNumberElement);
 
-    if (data.address === "") {
+    if (data.name === "") {
+      setData({ ...data, error: { message: "Name is required" } });
+      return;
+    }
+
+        if (data.address === "") {
       setData({ ...data, error: { message: "Address is required" } });
       return;
     }
@@ -80,6 +87,28 @@ export default function CheckoutForm() {
       setData({ ...data, error: { message: token.error.message } });
       return;
     }
+
+    if (cardNumberElement) {
+      const {error, paymentMethod} = await stripe?.createPaymentMethod({
+        type: 'card',
+        card: cardNumberElement,  // pass as card
+        billing_details: {
+          name: data.name,
+          "address": {
+            "line1": data.address,
+            "city": data.city,
+            "state": data.state
+          },
+        },
+      });
+
+      if (!error && paymentMethod?.id) {
+        onSuccessCard(paymentMethod.id);
+      } else {
+        onError();
+      }
+    }
+  
 
     const jwt = Cookie.get("token");
 
@@ -223,12 +252,7 @@ export default function CheckoutForm() {
           <div>
             <h5 className="text-lg font-semibold">Card information:</h5>
             <div className="my-4 w-full">
-              {/* <CardElement
-                id="card-element"
-                className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-                options={options}
-              /> */}
-              <div className="mb-4 w-full">
+            <div className="mb-4 w-full">
                 <label
                   className="block mb-2 test-gray-800 font-medium"
                   htmlFor="address"
@@ -259,7 +283,7 @@ export default function CheckoutForm() {
                     className="block mb-2 test-gray-800 font-medium"
                     htmlFor="address"
                   >
-                    Month/Year
+                    CVC
                   </label>
                   <CardCvcElement
                     className="appearance-none block w-full p-3 leading-5 text-gray-900 border border-gray-200 rounded-lg shadow-md placeholder-text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"

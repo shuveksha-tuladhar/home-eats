@@ -24,7 +24,7 @@ export default function OrderCart () {
             <h1 className="text-xl font-semibold text-center"> Your Cart</h1>
             {
                 cart.items.map(item => 
-                    <CartItem data={item} />)
+                    <CartItem key={item.id} data={item} />)
             }
             <div className="p-6">
                 <div className="flex mb-6 content-center justify-between">

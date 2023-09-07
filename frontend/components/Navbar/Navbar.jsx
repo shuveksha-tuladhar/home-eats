@@ -69,6 +69,7 @@ export default function Navbar() {
                         height="16"
                         src="/edit-pen.svg"
                         className="mr-3"
+                        alt="Sign Up"
                       />
                       <div className={styles.navbar_button_icon}>Sign Up</div>
                     </button>
@@ -89,6 +90,7 @@ export default function Navbar() {
                         height="16"
                         src="/user.svg"
                         className="mr-3"
+                        alt="Login"
                       />
                       <div className={styles.navbar_button_icon}>Login</div>
                     </button>
@@ -119,6 +121,7 @@ export default function Navbar() {
                         height="24"
                         src="/sign-out-fill.svg"
                         className="mr-3"
+                        alt="Logout"
                       />
                       <div className={styles.navbar_button_icon}>Logout</div>
                     </button>

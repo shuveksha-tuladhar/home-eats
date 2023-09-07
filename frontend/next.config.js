@@ -10,6 +10,7 @@ const nextConfig = {
         pathname: "/uploads/**",
       },
     ],
+    domains: ["home-eats.onrender.com"],
   },
 };
 

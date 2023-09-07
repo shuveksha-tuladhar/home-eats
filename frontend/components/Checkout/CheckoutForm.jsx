@@ -59,16 +59,16 @@ export default function CheckoutForm() {
 
   async function submitOrder(e) {
     e.preventDefault();
-   
+
     const cardNumberElement = elements.getElement(CardNumberElement);
-    const stripeToken = await stripe.createToken(CardNumberElement);
+    // const stripeToken = await stripe.createToken(CardNumberElement);
 
     if (data.name === "") {
       setData({ ...data, error: { message: "Name is required" } });
       return;
     }
 
-        if (data.address === "") {
+    if (data.address === "") {
       setData({ ...data, error: { message: "Address is required" } });
       return;
     }
@@ -83,92 +83,84 @@ export default function CheckoutForm() {
       return;
     }
 
-    if (token.error) {
-      setData({ ...data, error: { message: token.error.message } });
-      return;
-    }
-
     if (cardNumberElement) {
-      const {error, paymentMethod} = await stripe?.createPaymentMethod({
-        type: 'card',
-        card: cardNumberElement,  // pass as card
+      const { error, paymentMethod } = await stripe?.createPaymentMethod({
+        type: "card",
+        card: cardNumberElement, // pass as card
         billing_details: {
           name: data.name,
-          "address": {
-            "line1": data.address,
-            "city": data.city,
-            "state": data.state
+          address: {
+            line1: data.address,
+            city: data.city,
+            state: data.state,
           },
         },
       });
 
       if (!error && paymentMethod?.id) {
-        onSuccessCard(paymentMethod.id);
-      } else {
-        onError();
-      }
-    }
-  
+        const jwt = Cookie.get("token");
 
-    const jwt = Cookie.get("token");
+        try {
+          setLoading(true);
 
-    try {
-      setLoading(true);
-
-      const { data: response } = await client.mutate({
-        mutation: gql`
-          mutation CreateOrder(
-            $amount: Int
-            $dishes: JSON
-            $address: String
-            $city: String
-            $state: String
-            $token: String
-          ) {
-            createOrder(
-              data: {
-                amount: $amount
-                dishes: $dishes
-                address: $address
-                city: $city
-                state: $state
-                token: $token
-              }
-            ) {
-              data {
-                id
-                attributes {
-                  token
+          const { data: response } = await client.mutate({
+            mutation: gql`
+              mutation CreateOrder(
+                $amount: Int
+                $dishes: JSON
+                $address: String
+                $city: String
+                $state: String
+                $token: String
+              ) {
+                createOrder(
+                  data: {
+                    amount: $amount
+                    dishes: $dishes
+                    address: $address
+                    city: $city
+                    state: $state
+                    token: $token
+                  }
+                ) {
+                  data {
+                    id
+                    attributes {
+                      token
+                    }
+                  }
                 }
               }
-            }
-          }
-        `,
-        variables: {
-          amount: cart.total,
-          dishes: cart.items,
-          address: data.address,
-          city: data.city,
-          state: data.state,
-          chargeToken: stripeToken.token.id,
-        },
-        context: {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        },
-      });
+            `,
+            variables: {
+              amount: cart.total,
+              dishes: cart.items,
+              address: data.address,
+              city: data.city,
+              state: data.state,
+              token: paymentMethod.id,
+            },
+            context: {
+              headers: {
+                Authorization: `Bearer ${jwt}`,
+              },
+            },
+          });
 
-      if (response.createOrder.data) {
-        alert("Transaction Successful, continue your shopping");
-        setData(INITIAL_STATE);
-        resetCart();
-        router.push("/");
+          if (response.createOrder.data) {
+            alert("Transaction Successful, continue your shopping");
+            setData(INITIAL_STATE);
+            resetCart();
+            router.push("/");
+          }
+        } catch (error) {
+          setData({ ...data, error: { message: error.message } });
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        alert("Payment failed");
       }
-    } catch (error) {
-      setData({ ...data, error: { message: error.message } });
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -252,7 +244,7 @@ export default function CheckoutForm() {
           <div>
             <h5 className="text-lg font-semibold">Card information:</h5>
             <div className="my-4 w-full">
-            <div className="mb-4 w-full">
+              <div className="mb-4 w-full">
                 <label
                   className="block mb-2 test-gray-800 font-medium"
                   htmlFor="address"

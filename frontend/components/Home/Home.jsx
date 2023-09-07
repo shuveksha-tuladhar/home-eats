@@ -18,7 +18,7 @@ export default function Home() {
               placeholder="Search for restaurants"
               onChange={(e) => setQuery(e.target.value)}
             />
-            <button class="bg-green-700 hover:bg-green-600 ml-2 text-white font-bold py-2 px-5 border border-blue-700 rounded">
+            <button className="bg-green-700 hover:bg-green-600 ml-2 text-white font-bold py-2 px-5 border border-blue-700 rounded">
               Search
             </button>
           </div>

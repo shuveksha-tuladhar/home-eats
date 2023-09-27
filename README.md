@@ -72,3 +72,21 @@ npm run develop
 - Modify quantity of dishes on cart
 - Price and quantity shown in cart updates automatically
 - Check out and payment with stripe
+
+## Features
+
+**Home Page**
+
+**List of Restaurants**
+
+**Sign Up Page**
+
+**Login Page**
+
+**Dishes**
+
+**Cart**
+
+**Checkout**
+
+

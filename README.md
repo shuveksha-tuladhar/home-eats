@@ -89,6 +89,7 @@ npm run develop
 ![image](https://github.com/shuveksha-tuladhar/home-eats/assets/97779778/937f69e0-108e-488e-bc89-4c63c21a68b6)
 
 **Dishes**
+![image](https://github.com/shuveksha-tuladhar/home-eats/assets/97779778/d949e5d7-1023-497b-a9aa-b60be5162a5f)
 
 **Cart**
 ![image](https://github.com/shuveksha-tuladhar/home-eats/assets/97779778/9a0ebc7a-43b9-49f2-8d3c-4a2a6d4bc5d0)

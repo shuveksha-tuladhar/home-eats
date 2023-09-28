@@ -3,7 +3,8 @@
 Welcome to HomeEats, a comprehensive food ordering full-stack application developed with Strapi and Next.js, utilizing the power of React Hooks. This innovative platform empowers users to explore a diverse array of restaurants and dishes, enabling seamless meal ordering directly from their chosen restaurant. With an array of features including user authentication, registration, image uploading, restaurant and dish creation, cart management, and streamlined Stripe integration for orders, HomeEats redefines the culinary experience.
 
 ## Technologies Used
-![Static Badge](https://img.shields.io/badge/npm-%3E%3D_9.6.7-blue) ![Static Badge](https://img.shields.io/badge/node-%3E%3D_18.17.1-green)
+![Static Badge](https://img.shields.io/badge/npm-%3E%3D_9.6.7-blue) ![Static Badge](https://img.shields.io/badge/node-%3E%3D_18.17.1-green) ![Static Badge](https://img.shields.io/badge/react-%3E%3D_18.2.0-pink)
+![Static Badge](https://img.shields.io/badge/next-%3E%3D_13.4.12-purple) ![Static Badge](https://img.shields.io/badge/postgreSQL-v14-blue)
 
 JavaScript | React | NextJS | GraphQL | PostgreSQL | Strapi | Stripe | HTML5 | CSS | Tailwind CSS | Git 
 

@@ -81,6 +81,7 @@ npm run develop
 ![image](https://github.com/shuveksha-tuladhar/home-eats/assets/97779778/e44ace86-14b0-42ca-bfb1-27382104f218)
 
 **List of Restaurants**
+![image](https://github.com/shuveksha-tuladhar/home-eats/assets/97779778/32ccee2d-49a8-4dd5-bc9e-f985ecab1fbf)
 
 **Sign Up Page**
 ![image](https://github.com/shuveksha-tuladhar/home-eats/assets/97779778/1d0837b7-eb4d-4233-9a58-0dc03112bef6)

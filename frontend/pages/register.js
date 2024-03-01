@@ -21,13 +21,24 @@ const REGISTER_MUTATION = gql`
     }
   }
 `;
-
+const LOGIN_MUTATION = gql`
+  mutation Login($identifier: String!, $password: String!) {
+    login(input: { identifier: $identifier, password: $password }) {
+      jwt
+      user {
+        username
+        email
+      }
+    }
+  }
+`;
 export default function RegisterRoute() {
   const { setUser } = useAppContext();
   const router = useRouter();
 
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [registerMutation, { loading, error }] = useMutation(REGISTER_MUTATION);
+  const [loginMutation, { loading:loadingLogin, error:errorLogin }] = useMutation(LOGIN_MUTATION);
 
   const handleRegister = async () => {
     const { email, password } = formData;
@@ -40,8 +51,19 @@ export default function RegisterRoute() {
       Cookie.set("token", data.register.jwt);
     }
   };
-
-  if (loading) return <Loader />;
+  const handleDemoLogin = async () => {
+    const email = "test@test.com";
+    const password = "test1234";
+    const { data } = await loginMutation({
+      variables: { identifier: email, password },
+    });
+    if (data?.login.user) {
+      setUser(data.login.user);
+      Cookie.set("token", data.login.jwt);
+      router.push("/");
+    }
+  }
+  if (loading || loadingLogin) return <Loader />;
 
   return (
     <section className={`${styles.form_user_signup_image} inline-flex items-center justify-center w-full`}>
@@ -51,7 +73,8 @@ export default function RegisterRoute() {
       formData={formData}
       setFormData={setFormData}
       callback={handleRegister}
-      error={error}
+      error={error || errorLogin}
+      demoClick={handleDemoLogin}
     />
         </section>
     

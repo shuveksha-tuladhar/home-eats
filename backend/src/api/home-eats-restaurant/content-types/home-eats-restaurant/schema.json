@@ -34,6 +34,9 @@
       "relation": "oneToMany",
       "target": "api::dish.dish",
       "mappedBy": "home_eats_restaurant"
+    },
+    "image_url": {
+      "type": "string"
     }
   }
 }

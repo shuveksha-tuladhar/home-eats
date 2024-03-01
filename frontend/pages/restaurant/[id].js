@@ -17,6 +17,7 @@ query ($id: ID!) {
                 name
                 description
                 priceInCents:price
+                image_url
                 image {
                   data {
                     attributes {

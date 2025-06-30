@@ -10,12 +10,14 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "@nestjs/mongoose": "^11.0.3",
     "@strapi/plugin-graphql": "^4.12.1",
     "@strapi/plugin-i18n": "4.12.1",
     "@strapi/plugin-users-permissions": "4.12.1",
     "@strapi/strapi": "4.12.1",
     "@stripe/react-stripe-js": "^2.3.0",
     "@stripe/stripe-js": "^2.1.5",
+    "mongoose": "^8.16.1",
     "pg": "^8.8.0",
     "pg-connection-string": "^2.6.2",
     "stripe": "^12.17.0"

@@ -50,14 +50,14 @@ export class OrderService {
     if (!Types.ObjectId.isValid(userId)) {
       throw new BadRequestException(`Invalid User ID: ${userId}`);
     }
-    return this.orderModel.find({ user: userId }).exec();
+    return this.orderModel.find({ userId: userId }).exec();
   }
 
   async findOrdersByRestaurant(restaurantId: string): Promise<OrderDocument[]> {
     if (!Types.ObjectId.isValid(restaurantId)) {
       throw new BadRequestException(`Invalid Restaurant ID: ${restaurantId}`);
     }
-    return this.orderModel.find({ restaurant: restaurantId }).exec();
+    return this.orderModel.find({ restaurantId: restaurantId }).exec();
   }
 
   async update(updateOrderInput: UpdateOrderInput): Promise<OrderDocument> {

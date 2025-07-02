@@ -24,6 +24,6 @@ export class CreateUserInput {
   @Field()
   phoneNumber: string;
 
-  @Field(() => [AddressInput], { nullable: true, defaultValue: [] })
+  @Field(() => [AddressInput], { nullable: true })
   addresses: AddressInput[];
 }

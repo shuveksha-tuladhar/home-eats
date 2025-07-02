@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type Address {
+  address: String!
   city: String!
   state: String!
   zipCode: String!
@@ -47,7 +48,7 @@ input CreateUserInput {
   email: String!
   password: String!
   phoneNumber: String!
-  addresses: [AddressInput!] = []
+  addresses: [AddressInput!]
 }
 
 input AddressInput {
@@ -64,8 +65,7 @@ input UpdateUserInput {
   lastName: String
   username: String
   email: String
-  password: String
   phoneNumber: String
-  addresses: [AddressInput!] = []
+  addresses: [AddressInput!]
   _id: ID!
 }

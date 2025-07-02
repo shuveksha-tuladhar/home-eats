@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Address, AddressSchema } from './address.schema'; // Correct import and use of Address
+import { Address, AddressSchema } from './address.schema';
 
 export interface UserDocument extends User, Document {
   _id: string;

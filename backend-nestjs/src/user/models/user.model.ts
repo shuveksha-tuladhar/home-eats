@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Address } from './address.model'; // Import the GraphQL Address type
+import { Address } from './address.model';
 
 @ObjectType()
 export class User {

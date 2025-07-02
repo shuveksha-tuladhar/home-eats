@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Review, ReviewSchema } from './review.schema';
 
 export interface IDishDocument extends Dish, Document {}
 
@@ -29,9 +28,6 @@ export class Dish {
 
   @Prop({ default: 0, min: 0, max: 5 })
   rating: number;
-
-  @Prop({ type: [ReviewSchema], default: [] })
-  reviews: Review[];
 }
 
 export const DishSchema = SchemaFactory.createForClass(Dish);

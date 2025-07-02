@@ -24,8 +24,5 @@ export class Dish {
   categories: string[];
 
   @Field(() => [String])
-  sides: string[];
-
-  @Field(() => Float)
-  rating: number;
+  sides?: string[];
 }

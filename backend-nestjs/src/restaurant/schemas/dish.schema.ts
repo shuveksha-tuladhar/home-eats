@@ -14,20 +14,17 @@ export class Dish {
   @Prop({ required: true, min: 0 })
   price: number;
 
-  @Prop({ type: [String], default: [] })
+  @Prop({ type: [String] })
   imageUrls: string[];
 
   @Prop({ default: true })
   isActive: boolean;
 
-  @Prop({ type: [String], default: [] })
+  @Prop({ type: [String] })
   categories: string[];
 
-  @Prop({ type: [String], default: [] })
-  sides: string[];
-
-  @Prop({ default: 0, min: 0, max: 5 })
-  rating: number;
+  @Prop({ type: [String] })
+  sides?: string[];
 }
 
 export const DishSchema = SchemaFactory.createForClass(Dish);

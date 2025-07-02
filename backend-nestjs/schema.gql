@@ -30,14 +30,67 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type OpeningHour {
+  day: String!
+  open: String!
+  close: String!
+}
+
+type Review {
+  _id: ID!
+  rating: Int!
+  comment: String
+  user: ID!
+  username: String!
+  commentedAt: DateTime!
+  isFlagged: Boolean!
+  isApproved: Boolean!
+}
+
+type Dish {
+  _id: ID!
+  name: String!
+  description: String
+  price: Float!
+  imageUrls: [String!]!
+  isActive: Boolean!
+  categories: [String!]!
+  sides: [String!]!
+}
+
+type Restaurant {
+  _id: ID!
+  name: String!
+  description: String
+  imageUrls: [String!]!
+  owner: ID!
+  phoneNumber: String
+  address: String
+  city: String
+  state: String
+  zipCode: String
+  latitude: Float
+  longitude: Float
+  openingHours: [OpeningHour!]!
+  menu: [Dish!]!
+  reviews: [Review!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
   users: [User!]!
   user(id: ID!): User
+  restaurants: [Restaurant!]!
+  restaurant(id: String!): Restaurant!
 }
 
 type Mutation {
   createUser(input: CreateUserInput!): User!
   updateUser(input: UpdateUserInput!): User!
+  createRestaurant(input: CreateRestaurantInput!): Restaurant!
+  updateRestaurant(input: UpdateRestaurantInput!): Restaurant!
+  removeRestaurant(id: String!): Restaurant!
 }
 
 input CreateUserInput {
@@ -67,5 +120,66 @@ input UpdateUserInput {
   email: String
   phoneNumber: String
   addresses: [AddressInput!]
+  _id: ID!
+}
+
+input CreateRestaurantInput {
+  name: String!
+  description: String
+  imageUrls: [String!]
+  owner: ID!
+  phoneNumber: String
+  address: String
+  city: String
+  state: String
+  zipCode: String
+  latitude: Float
+  longitude: Float
+  openingHours: [OpeningHourInput!]
+  menu: [DishInput!]
+  reviews: [ReviewInput!]
+}
+
+input OpeningHourInput {
+  day: String!
+  open: String!
+  close: String!
+}
+
+input DishInput {
+  _id: ID
+  name: String!
+  description: String
+  price: Float!
+  imageUrls: [String!]
+  isActive: Boolean
+  categories: [String!]
+  sides: [String!]
+  rating: Float
+  reviews: [ReviewInput!]
+}
+
+input ReviewInput {
+  _id: ID
+  rating: Float!
+  comment: String
+  user: ID!
+  username: String!
+}
+
+input UpdateRestaurantInput {
+  name: String
+  description: String
+  imageUrls: [String!]
+  phoneNumber: String
+  address: String
+  city: String
+  state: String
+  zipCode: String
+  latitude: Float
+  longitude: Float
+  openingHours: [OpeningHourInput!]
+  menu: [DishInput!]
+  reviews: [ReviewInput!]
   _id: ID!
 }

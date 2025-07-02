@@ -1,10 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 import { Dish, DishSchema } from './dish.schema';
 import { Review, ReviewSchema } from './review.schema';
-import OpeningHourSchema, { OpeningHour } from './openingHour.schema';
+import OpeningHourSchema, { OpeningHour } from './opening-hour.schema';
 
-export interface IRestaurantDocument extends Restaurant, Document {}
+export interface RestaurantDocument extends Restaurant, Document {
+  _id: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 @Schema({ timestamps: true })
 export class Restaurant {
@@ -14,26 +18,26 @@ export class Restaurant {
   @Prop({ trim: true })
   description?: string;
 
-  @Prop({ type: [String], default: [] })
+  @Prop({ type: [String] })
   imageUrls: string[];
 
-  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
-  owner: Types.ObjectId;
+  @Prop()
+  owner: string;
 
   @Prop({ trim: true })
-  phoneNumber?: string;
+  phoneNumber: string;
 
   @Prop({ trim: true })
-  address?: string;
+  address: string;
 
   @Prop({ trim: true })
-  city?: string;
+  city: string;
 
   @Prop({ trim: true })
-  state?: string;
+  state: string;
 
   @Prop({ trim: true })
-  zipCode?: string;
+  zipCode: string;
 
   @Prop()
   latitude?: number;
@@ -41,16 +45,13 @@ export class Restaurant {
   @Prop()
   longitude?: number;
 
-  @Prop({ type: [OpeningHourSchema], default: [] })
+  @Prop({ type: [OpeningHourSchema] })
   openingHours: OpeningHour[];
 
-  @Prop({ type: [DishSchema], default: [] })
+  @Prop({ type: [DishSchema] })
   menu: Dish[];
 
-  @Prop({ default: 0, min: 0, max: 5 })
-  rating: number;
-
-  @Prop({ type: [ReviewSchema], default: [] })
+  @Prop({ type: [ReviewSchema] })
   reviews: Review[];
 }
 

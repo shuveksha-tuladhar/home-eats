@@ -1,5 +1,4 @@
 import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
-import { Types } from 'mongoose';
 
 @ObjectType()
 export class Review {
@@ -13,7 +12,7 @@ export class Review {
   comment?: string;
 
   @Field(() => ID)
-  user: Types.ObjectId;
+  user: string;
 
   @Field()
   username: string;

@@ -1,5 +1,4 @@
 import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
-import { Types } from 'mongoose';
 import { OpeningHour } from './opening-hour.model';
 import { Review } from './review.model';
 import { Dish } from './dish.model';
@@ -19,22 +18,22 @@ export class Restaurant {
   imageUrls: string[];
 
   @Field(() => ID)
-  owner: Types.ObjectId;
+  owner: string;
 
   @Field({ nullable: true })
-  phoneNumber?: string;
+  phoneNumber: string;
 
   @Field({ nullable: true })
-  address?: string;
+  address: string;
 
   @Field({ nullable: true })
-  city?: string;
+  city: string;
 
   @Field({ nullable: true })
-  state?: string;
+  state: string;
 
   @Field({ nullable: true })
-  zipCode?: string;
+  zipCode: string;
 
   @Field(() => Float, { nullable: true })
   latitude?: number;
@@ -47,9 +46,6 @@ export class Restaurant {
 
   @Field(() => [Dish])
   menu: Dish[];
-
-  @Field(() => Float)
-  rating: number;
 
   @Field(() => [Review])
   reviews: Review[];

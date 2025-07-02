@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 
 export interface IReviewDocument extends Review, Document {}
 
@@ -11,8 +11,8 @@ export class Review {
   @Prop({ trim: true })
   comment?: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
-  user: Types.ObjectId;
+  @Prop()
+  user: string;
 
   @Prop({ required: true, trim: true })
   username: string;

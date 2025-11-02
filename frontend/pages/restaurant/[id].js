@@ -4,37 +4,20 @@ import Loader from "@/components/Loader";
 import DishCard from "@/components/DishCard/DishCard";
 
 const GET_RESTAURANT_DISHES = gql`
-query ($id: ID!) {
-    homeEatsRestaurant(id: $id) {
-      data {
-        id
-        attributes {
-          name
-          dishes {
-            data {
-              id
-              attributes {
-                name
-                description
-                priceInCents:price
-                image_url
-                image {
-                  data {
-                    attributes {
-                      url
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+  query ($id: String!) {
+    restaurant(id: $id) {
+      _id
+      name
+      dishes: menu {
+        _id
+        name
+        description
+        price
+        imageUrls
       }
     }
   }
 `;
-
-
 
 export default function Restaurant() {
   const router = useRouter();
@@ -44,22 +27,20 @@ export default function Restaurant() {
 
   if (error) return "Error Loading Dishes";
   if (loading) return <Loader />;
-  if (data.homeEatsRestaurant.data.attributes.dishes.data.length) {
-    const { homeEatsRestaurant } = data;
+  if (data.restaurant.dishes.length) {
+    const { restaurant } = data;
 
     return (
       <div className="py-6 max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-green-600 mb-4">
-          {homeEatsRestaurant.data.attributes.name}
+          {restaurant.name}
         </h1>
         <div className="pb-16 bg-white rounded-3xl">
-    
-            <div className="flex flex-wrap -m-4 mb-6">
-              {homeEatsRestaurant.data.attributes.dishes.data.map((res) => {
-                return <DishCard key={res.id} data={res} />;
-              })}
-            </div>
-    
+          <div className="flex flex-wrap -m-4 mb-6">
+            {restaurant.dishes.map((res) => {
+              return <DishCard key={res._id} data={res} />;
+            })}
+          </div>
         </div>
       </div>
     );

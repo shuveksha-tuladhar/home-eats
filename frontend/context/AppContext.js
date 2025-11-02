@@ -34,10 +34,11 @@ export const AppProvider = ({ children }) => {
         quantity: 1,
         ...item,
       };
+      console.log('Item:', newItem);
       setCart((prevCart) => ({
         items: [...prevCart.items, newItem],
         totalCartQuantity: prevCart.totalCartQuantity + 1,
-        total: prevCart.total + item.attributes.priceInCents,
+        total: prevCart.total + item.price,
       }));
     } else {
       setCart((prevCart) => ({
@@ -45,7 +46,7 @@ export const AppProvider = ({ children }) => {
           i.id === newItem.id ? { ...i, quantity: i.quantity + 1 } : i
         ),
         totalCartQuantity: prevCart.totalCartQuantity + 1,
-        total: prevCart.total + item.attributes.priceInCents,
+        total: prevCart.total + item.price,
       }));
     }
   };

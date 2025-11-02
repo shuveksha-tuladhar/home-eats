@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { FaSearch, FaShippingFast } from "react-icons/fa";
 import { FaUtensils, FaMapMarkerAlt, FaSmile } from "react-icons/fa";
+import RestaurantList from "../Restaurants/RestaurantList";
 
-export default function Home() {
+export default function Home(props) {
   const [query, setQuery] = useState("");
 
   return (
@@ -124,6 +125,14 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="bg-base/10 py-8 mb-8">
+        <div className="max-w-screen-xl mx-auto px-4 text-center flex flex-col items-center">
+          <h2 className="text-4xl sm:text-[43px] font-bold text-primary leading-[112%]">
+            Featured Restaurants
+          </h2>
+          <RestaurantList query={props.query} />
         </div>
       </section>
     </>

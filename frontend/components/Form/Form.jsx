@@ -10,7 +10,6 @@ export default function Form({
   demoClick,
 }) {
   return (
-    <section className="py-8 rounded-lg bg-white inline-block w-1/3">
       <div className="container px-4 mx-auto">
         <div className="max-w-sm mx-auto">
           <div className="mb-6 text-center">
@@ -22,7 +21,7 @@ export default function Form({
                 className="block mb-2 text-coolGray-800 font-medium"
                 htmlFor="email"
               >
-                Email
+                Email or Username
               </label>
               <input
                 id="email"
@@ -61,20 +60,19 @@ export default function Form({
               </div>
             )}
             <button
-              className="inline-block py-3 px-7 mb-6 w-full text-base text-green-50 font-medium text-center leading-6 bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-md shadow-sm"
+              className="inline-block py-3 px-7 mb-6 w-full text-white font-medium text-center leading-6 bg-primary hover:bg-primary-dark focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-md shadow-sm"
               type="submit"
             >
               {buttonText}
             </button>
             <button
-              className="inline-block py-3 px-7 mb-6 w-full text-base text-green-50 font-medium text-center leading-6 bg-green-500 hover:bg-green-600 focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-md shadow-sm"
               onClick={demoClick}
+              className="inline-block py-3 px-7 mb-6 w-full text-white font-medium text-center leading-6 bg-primary hover:bg-primary-dark focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-md shadow-sm"
              >
               Demo Login
             </button>
           </form>
         </div>
       </div>
-    </section>
   );
 }

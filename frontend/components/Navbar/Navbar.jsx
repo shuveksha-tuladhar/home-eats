@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import { useEffect, useState } from "react";
-import { FaUserCircle, FaSearch } from "react-icons/fa"; // Replaces AccountCircle
+import { FaUserCircle } from "react-icons/fa";
+import Cart from "../Cart/Cart";
 
 export default function Navbar() {
   const [scrollTop, setScrollTop] = useState(true);
@@ -64,6 +65,7 @@ export default function Navbar() {
           </>
         ) : (
           <li className="flex items-center gap-2">
+            <Cart />
             <FaUserCircle className="text-[#555] text-2xl" />
             <button
               onClick={handleSignOut}

@@ -30,6 +30,18 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type UserResponseDto {
+  jwt: String!
+  username: String!
+  email: String!
+}
+
+type LoggedUserDto {
+  _id: String!
+  username: String!
+  email: String!
+}
+
 type OpeningHour {
   day: String!
   open: String!
@@ -111,8 +123,7 @@ enum OrderStatus {
 }
 
 type Query {
-  users: [User!]!
-  user(id: ID!): User
+  me: LoggedUserDto!
   restaurants: [Restaurant!]!
   restaurant(id: String!): Restaurant!
   findAllOrders: [Order!]!
@@ -122,33 +133,15 @@ type Query {
 }
 
 type Mutation {
-  createUser(input: CreateUserInput!): User!
   updateUser(input: UpdateUserInput!): User!
+  login(identifier: String!, password: String!): UserResponseDto!
+  register(input: CreateUserInput!): UserResponseDto!
   createRestaurant(input: CreateRestaurantInput!): Restaurant!
   updateRestaurant(input: UpdateRestaurantInput!): Restaurant!
   removeRestaurant(id: String!): Restaurant!
   createOrder(input: CreateOrderInput!): Order!
   updateOrder(input: UpdateOrderInput!): Order!
   removeOrder(id: String!): Order!
-}
-
-input CreateUserInput {
-  firstName: String!
-  middleName: String
-  lastName: String!
-  username: String!
-  email: String!
-  password: String!
-  phoneNumber: String!
-  addresses: [AddressInput!]
-}
-
-input AddressInput {
-  address: String!
-  city: String!
-  state: String!
-  zipCode: String!
-  isPrimary: Boolean! = false
 }
 
 input UpdateUserInput {
@@ -160,6 +153,25 @@ input UpdateUserInput {
   phoneNumber: String
   addresses: [AddressInput!]
   _id: ID!
+}
+
+input AddressInput {
+  address: String!
+  city: String!
+  state: String!
+  zipCode: String!
+  isPrimary: Boolean! = false
+}
+
+input CreateUserInput {
+  firstName: String!
+  middleName: String
+  lastName: String!
+  username: String!
+  email: String!
+  password: String!
+  phoneNumber: String!
+  addresses: [AddressInput!]
 }
 
 input CreateRestaurantInput {

@@ -10,12 +10,10 @@ import styles from "@/components/Form/Form.module.css";
 
 const LOGIN_MUTATION = gql`
   mutation Login($identifier: String!, $password: String!) {
-    login(input: { identifier: $identifier, password: $password }) {
+    login(identifier: $identifier, password: $password) {
       jwt
-      user {
-        username
-        email
-      }
+      username
+      email
     }
   }
 `;
@@ -32,39 +30,44 @@ export default function LoginRoute() {
     const { data } = await loginMutation({
       variables: { identifier: email, password },
     });
-    if (data?.login.user) {
-      setUser(data.login.user);
+    if (data?.login.username && data?.login.email) {
+      setUser({ username: data.login.username, email: data.login.email });
       Cookie.set("token", data.login.jwt);
       router.push("/");
     }
   };
 
   const handleDemoLogin = async () => {
-    const email = "test@test.com";
+    const email = "harry.potter@test.com";
     const password = "test1234";
     const { data } = await loginMutation({
       variables: { identifier: email, password },
     });
-    if (data?.login.user) {
-      setUser(data.login.user);
+    if (data?.login.username && data?.login.email) {
+      setUser({ username: data.login.username, email: data.login.email });
       Cookie.set("token", data.login.jwt);
       router.push("/");
     }
-  }
+  };
 
   if (loading) return <Loader />;
 
   return (
-    <section className={`${styles.form_user_login_image} inline-flex items-center justify-center w-full`}>
-      <Form
-        title="Login"
-        buttonText="Login"
-        formData={formData}
-        setFormData={setFormData}
-        callback={handleLogin}
-        error={error}
-        demoClick={handleDemoLogin}
-      />
-      </section>
+    <section className="relative min-h-[calc(100vh-140px)] sm:min-h-[calc(100vh-120px)] md:min-h-[calc(100vh-100px)] lg:min-h-screen bg-gradient-to-br from-lightbg to-lightbg2 flex items-center py-4 sm:py-6 md:py-8 lg:py-0 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/v2/background-register.jpg')] bg-cover bg-center -z-10" />
+      <div className="container mx-auto px-4 flex justify-center items-center">
+        <div className="w-full max-w-xl bg-white bg-opacity-90 rounded-xl shadow-lg p-6 sm:p-8">
+          <Form
+            title="Login"
+            buttonText="Login"
+            formData={formData}
+            setFormData={setFormData}
+            callback={handleLogin}
+            error={error}
+            demoClick={handleDemoLogin}
+          />
+        </div>
+      </div>
+    </section>
   );
 }

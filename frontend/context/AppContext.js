@@ -59,13 +59,13 @@ export const AppProvider = ({ children }) => {
           i.id === newItem.id ? { ...i, quantity: i.quantity - 1 } : i
         ),
         totalCartQuantity: prevCart.totalCartQuantity - 1,
-        total: prevCart.total - item.attributes.priceInCents,
+        total: prevCart.total - item.price,
       }));
     } else {
       setCart((prevCart) => ({
         items: prevCart.items.filter((i) => i.id !== item.id),
         totalCartQuantity: prevCart.totalCartQuantity - 1,
-        total: prevCart.total - item.attributes.priceInCents,
+        total: prevCart.total - item.price,
       }));
     }
   };
@@ -97,7 +97,7 @@ const getUser = async () => {
     query: gql`
       query {
         me {
-          id
+          _id
           email
           username
         }

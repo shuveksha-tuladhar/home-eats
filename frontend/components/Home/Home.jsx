@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FaSearch, FaShippingFast } from "react-icons/fa";
 import { FaUtensils, FaMapMarkerAlt, FaSmile } from "react-icons/fa";
 import RestaurantList from "../Restaurants/RestaurantList";
+import SearchBox from "./subcomponents/SearchBox/SearchBox";
 
 export default function Home(props) {
   const [query, setQuery] = useState("");
@@ -23,38 +23,7 @@ export default function Home(props) {
                 </p>
               </div>
 
-              <div className="bg-white rounded-2xl shadow-highlight overflow-hidden max-w-full sm:max-w-[800px]">
-                <div className="p-4 sm:p-6">
-                  <div className="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-lg sm:text-xl px-4 py-1.5 rounded-full">
-                    <FaShippingFast className="text-primary" />
-                    Delivery
-                  </div>
-                </div>
-
-                <div className="h-[1px] bg-line" />
-
-                <div className="p-4 sm:p-6">
-                  <form
-                    className="flex flex-col sm:flex-row items-center gap-4"
-                    onSubmit={(e) => e.preventDefault()}
-                  >
-                    <input
-                      type="text"
-                      placeholder="Search for restaurants"
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                      className="w-full bg-base text-muted placeholder-muted text-base sm:text-lg rounded-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
-                    />
-                    <button
-                      type="submit"
-                      className="min-w-[150px] sm:min-w-[180px] whitespace-nowrap flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold text-lg rounded-full px-6 py-3 transition transform hover:-translate-y-0.5"
-                    >
-                      <FaSearch />
-                      Find Food
-                    </button>
-                  </form>
-                </div>
-              </div>
+              <SearchBox query={query} setQuery={setQuery} />
             </div>
           </div>
         </div>

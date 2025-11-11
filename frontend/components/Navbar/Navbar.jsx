@@ -7,7 +7,7 @@ import Cart from "../Cart/Cart";
 
 export default function Navbar() {
   const [scrollTop, setScrollTop] = useState(true);
-  const { user, setUser, resetCart } = useAppContext();
+  const { user, logOut } = useAppContext();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,8 +18,7 @@ export default function Navbar() {
   }, []);
 
   const handleSignOut = () => {
-    setUser("");
-    resetCart();
+    logOut();
   };
 
   return (
@@ -44,7 +43,7 @@ export default function Navbar() {
         </Link>
       </div>
       <ul className="flex items-center gap-1 list-none m-0 p-0">
-        {user === "" ? (
+        {!user ? (
           <>
             <li>
               <Link

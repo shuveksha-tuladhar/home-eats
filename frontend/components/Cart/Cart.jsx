@@ -6,7 +6,6 @@ import { useInitialRender } from "@/utils/useInitialRender";
 export default function Cart() {
   const router = useRouter();
   const { user, cart } = useAppContext();
-  console.log("Cart:", cart);
 
   const initialRender = useInitialRender();
   if (!initialRender) return null;

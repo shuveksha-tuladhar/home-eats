@@ -105,40 +105,40 @@ export default function CheckoutForm() {
 
           const { data: response } = await client.mutate({
             mutation: gql`
-              mutation CreateOrder(
-                $amount: Int
-                $dishes: JSON
-                $address: String
-                $city: String
-                $state: String
-                $token: String
-              ) {
-                createOrder(
-                  data: {
-                    amount: $amount
-                    dishes: $dishes
-                    address: $address
-                    city: $city
-                    state: $state
-                    token: $token
+              mutation CreateOrder($createOrder: CreateOrderInput!) {
+                createOrder(input: $createOrder) {
+                  _id
+                  address
+                  city
+                  state
+                  paymentToken
+                  dishes {
+                    _id
+                    dishId
+                    name
+                    price
                   }
-                ) {
-                  data {
-                    id
-                    attributes {
-                      token
-                    }
-                  }
+                  restaurantId
+                  status
                 }
               }
             `,
             variables: {
-              amount: cart.total,
-              dishes: cart.items,
-              address: data.address,
-              city: data.city,
-              state: data.state,
-              token: paymentMethod.id,
+              createOrder: {
+                amount: cart.total,
+                dishes: cart.items.map((item) => ({
+                  quantity: item.quantity,
+                  dishId: item._id,
+                  name: item.name,
+                  price: item.price,
+                })),
+                address: data.address,
+                city: data.city,
+                state: data.state,
+                paymentToken: paymentMethod.id,
+                userId: "686487f6ecc1ba79c692d275",
+                restaurantId: cart.restaurant._id,
+              },
             },
             context: {
               headers: {
@@ -147,7 +147,9 @@ export default function CheckoutForm() {
             },
           });
 
-          if (response.createOrder.data) {
+          console.log('response from createOrder:', response);
+
+          if (response.createOrder) {
             alert("Transaction Successful, continue your shopping");
             setData(INITIAL_STATE);
             resetCart();

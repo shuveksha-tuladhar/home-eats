@@ -7,6 +7,15 @@ const GET_RESTAURANT_DISHES = gql`
   query ($id: String!) {
     restaurant(id: $id) {
       _id
+      address
+      city
+      state
+      zipCode
+      phoneNumber
+      reviews {
+        rating
+      }
+      imageUrls
       name
       dishes: menu {
         _id
@@ -37,8 +46,10 @@ export default function Restaurant() {
         </h1>
         <div className="pb-16 bg-white rounded-3xl">
           <div className="flex flex-wrap -m-4 mb-6">
-            {restaurant.dishes.map((res) => {
-              return <DishCard key={res._id} data={res} />;
+            {restaurant.dishes.map((dish) => {
+              return (
+                <DishCard key={dish._id} restaurant={restaurant} data={dish} />
+              );
             })}
           </div>
         </div>

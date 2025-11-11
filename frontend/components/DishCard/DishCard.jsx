@@ -1,10 +1,23 @@
 import { useAppContext } from "@/context/AppContext";
+import { useState } from "react";
 import Image from "next/image";
 
-export default function DishCard({ data }) {
-  const { addItem } = useAppContext();
+export default function DishCard({ data, restaurant }) {
+  const { cart, addItem } = useAppContext();
+  const [showPopup, setShowPopup] = useState(false);
+
   function handleAddItem() {
-    addItem(data);
+    // Ordering for the setRestuarant should be set in the context before adding item
+    // setRestaurant({_id: restaurant._id, name: restaurant.name});
+    if (cart.restaurant && cart.restaurant._id !== restaurant._id) {
+      setShowPopup(true);
+      return;
+    }
+    addItem(data, restaurant);
+  }
+
+  function handleClosePopup() {
+    setShowPopup(false);
   }
 
   return (
@@ -45,6 +58,38 @@ export default function DishCard({ data }) {
           </div>
         </div>
       </div>
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-full lg:w-1/2">
+            <p className="mb-4">
+              <p className="mb-4">
+                You’re about to start a new order from <b>{restaurant.name}</b>.{" "}
+              </p>
+              <p>
+                This will clear your current cart, since you can only order from
+                one restaurant at a time.
+              </p>
+            </p>
+            <div className="flex gap-4 mt-4">
+              <button
+                className="px-4 py-2 bg-primary text-white rounded"
+                onClick={() => {
+                  setShowPopup(false);
+                  addItem(data, restaurant);
+                }}
+              >
+                Proceed
+              </button>
+              <button
+                className="px-4 py-2 bg-gray-300 text-gray-800 rounded"
+                onClick={handleClosePopup}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

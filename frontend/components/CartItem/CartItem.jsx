@@ -2,9 +2,9 @@ import { useAppContext } from "@/context/AppContext";
 import { useInitialRender } from "@/utils/useInitialRender";
 
 export default function CartItem(props) {
-  const { data } = props;
+  const { data, restaurant } = props;
   const { addItem, removeItem } = useAppContext();
-  const { quantity, name, price, imageUrls } = data;
+  const { quantity, name, price, imageUrls, } = data;
   const initialRender = useInitialRender();
   if (!initialRender) return null;
 
@@ -33,7 +33,7 @@ export default function CartItem(props) {
             <span>{quantity}</span>
             <button
               className="w-6 h-6 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600"
-              onClick={() => addItem(data)}
+              onClick={() => addItem(data, restaurant)}
             >
               +
             </button>

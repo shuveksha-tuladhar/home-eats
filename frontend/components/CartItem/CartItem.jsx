@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function CartItem(props) {
   const { data, restaurant } = props;
   const { addItem, removeItem } = useAppContext();
-  const { quantity, name, price, imageUrls, } = data;
+  const { quantity, name, price, imageUrls } = data;
   const initialRender = useInitialRender();
   if (!initialRender) return null;
 
@@ -14,13 +14,9 @@ export default function CartItem(props) {
   return (
     <div className="py-4 flex flex-wrap justify-between border-b border-blueGray-800 items-center">
       <div className="w-1/6 flex justify-center items-center">
-        <Image
-          src={imgSrc}
-          alt={name}
-          width={16}
-          height={16}
-          className="object-cover rounded"
-        />
+        <div className="relative w-16 h-16 rounded overflow-hidden">
+          <Image src={imgSrc} alt={name} fill className="object-cover" />
+        </div>
       </div>
       <div className="w-2/4">
         <div className="flex flex-col h-full">

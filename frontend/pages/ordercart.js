@@ -26,17 +26,19 @@ export default function OrderCart({ loginRedirect }) {
 
   return (
     <section className="relative min-h-[calc(100vh-140px)] sm:min-h-[calc(100vh-120px)] md:min-h-[calc(100vh-100px)] lg:min-h-screen bg-gradient-to-br from-lightbg to-lightbg2 flex items-center py-4 sm:py-6 md:py-8 lg:py-0 overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center opacity-50 -z-10" />
+      <div className="absolute inset-0 bg-[url('/v2/background-cart.jpg')] bg-cover bg-center opacity-50 -z-10" />
       <div className="container mx-auto px-4 flex justify-center items-center">
         <div className="w-full max-w-2xl bg-white bg-opacity-95 rounded-xl shadow-lg p-6 sm:p-8 flex flex-col md:flex-row gap-8">
           <div className="flex-1">
             {cart.items.length > 0 ? (
               <div
                 className="flex flex-row items-start gap-4 mb-6 border-b border-gray-200 pb-4 cursor-pointer hover:bg-gray-100 transition"
-                onClick={() => router.push(`/restaurant/${cart.restaurant._id}`)}
+                onClick={() =>
+                  router.push(`/restaurant/${cart.restaurant._id}`)
+                }
                 role="button"
                 tabIndex={0}
-                onKeyPress={e => {
+                onKeyPress={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     router.push(`/restaurant/${cart.restaurant.id}`);
                   }
@@ -45,13 +47,14 @@ export default function OrderCart({ loginRedirect }) {
                 {cart.restaurant?.imageUrls &&
                   cart.restaurant?.imageUrls[0] && (
                     <div className="flex-shrink-0">
-                      <Image
-                        src={cart.restaurant.imageUrls[0]}
-                        alt={cart.restaurant.name}
-                        width={20}
-                        height={20}
-                        className="rounded-xl object-cover"
-                      />
+                      <div className="relative w-20 h-20 rounded-xl overflow-hidden">
+                        <Image
+                          src={cart.restaurant.imageUrls[0]}
+                          alt={cart.restaurant.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
                   )}
                 <div className="flex-1">
@@ -90,7 +93,7 @@ export default function OrderCart({ loginRedirect }) {
                 <div className="space-y-4 mb-6">
                   {cart.items.map((item) => (
                     <CartItem
-                      key={item._id}
+                      key={item.id}
                       data={item}
                       restaurant={cart.restaurant}
                     />

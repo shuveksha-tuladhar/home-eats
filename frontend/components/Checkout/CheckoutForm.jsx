@@ -125,12 +125,12 @@ export default function CheckoutForm() {
             `,
             variables: {
               createOrder: {
-                amount: cart.total,
+                amount: (cart.total + 5.99).toFixed(2),
                 dishes: cart.items.map((item) => ({
                   quantity: item.quantity,
                   dishId: item._id,
                   name: item.name,
-                  price: item.price,
+                  price: item.price.toFixed(2),
                 })),
                 address: data.address,
                 city: data.city,
@@ -147,13 +147,11 @@ export default function CheckoutForm() {
             },
           });
 
-          console.log('response from createOrder:', response);
-
           if (response.createOrder) {
             alert("Transaction Successful, continue your shopping");
             setData(INITIAL_STATE);
             resetCart();
-            router.push("/");
+            router.push("/status/" + response.createOrder._id);
           }
         } catch (error) {
           setData({ ...data, error: { message: error.message } });

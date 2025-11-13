@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 import CartItem from "@/components/CartItem/CartItem";
 import { useRouter } from "next/router";
@@ -44,7 +45,7 @@ export default function OrderCart({ loginRedirect }) {
                 {cart.restaurant?.imageUrls &&
                   cart.restaurant?.imageUrls[0] && (
                     <div className="flex-shrink-0">
-                      <img
+                      <Image
                         src={cart.restaurant.imageUrls[0]}
                         alt={cart.restaurant.name}
                         className="rounded-xl object-cover w-20 h-20"
@@ -179,7 +180,7 @@ export default function OrderCart({ loginRedirect }) {
                   Your cart is empty
                 </h3>
                 <p className="text-gray-500 mb-6">
-                  Looks like you haven't added any items yet.
+                  Looks like you have not added any items yet.
                 </p>
                 <button
                   onClick={() => router.push("/")}

@@ -19,7 +19,9 @@ export default function RestaurantMap({ restaurant }) {
             <Image
               src={restaurant.imageUrls[0]}
               alt={restaurant.name}
-              className="rounded-xl object-cover w-20 h-20"
+              width={20}
+              height={20}
+              className="rounded-xl object-cover"
             />
           </div>
         )}

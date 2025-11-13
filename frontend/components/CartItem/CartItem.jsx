@@ -17,7 +17,9 @@ export default function CartItem(props) {
         <Image
           src={imgSrc}
           alt={name}
-          className="w-16 h-16 object-cover rounded"
+          width={16}
+          height={16}
+          className="object-cover rounded"
         />
       </div>
       <div className="w-2/4">

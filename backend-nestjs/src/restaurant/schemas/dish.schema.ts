@@ -5,6 +5,8 @@ export interface IDishDocument extends Dish, Document {}
 
 @Schema({ _id: true })
 export class Dish {
+  [x: string]: any;
+
   @Prop({ required: true, trim: true })
   name: string;
 

@@ -10,6 +10,7 @@ import { Restaurant, RestaurantSchema } from './schemas/restaurant.schema';
       { name: Restaurant.name, schema: RestaurantSchema },
     ]),
   ],
+  exports: [RestaurantService],
   providers: [RestaurantService, RestaurantResolver],
 })
 export class RestaurantModule {}

@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { OrderService } from './order.service';
 import { Order } from './models/order.model';
 import { CreateOrderInput } from './dto/create-order.input';
-import { UpdateOrderInput } from './dto/update-order.input';
+import { OrderResponse } from './dto/order.response';
 
 @Resolver(() => Order)
 export class OrderResolver {
@@ -37,15 +37,8 @@ export class OrderResolver {
     return this.orderService.findOrdersByRestaurant(restaurantId);
   }
 
-  @Mutation(() => Order)
-  async updateOrder(
-    @Args('input') updateOrderInput: UpdateOrderInput,
-  ): Promise<Order> {
-    return this.orderService.update(updateOrderInput);
-  }
-
-  @Mutation(() => Order)
-  async removeOrder(@Args('id') id: string): Promise<Order | null> {
-    return this.orderService.remove(id);
+  @Query(() => OrderResponse)
+  async orderDetails(@Args('id') id: string): Promise<OrderResponse | null> {
+    return this.orderService.orderDetails(id);
   }
 }

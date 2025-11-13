@@ -71,6 +71,7 @@ export class UserService {
       const payload = jwt.verify(token, secret);
       return payload;
     } catch (e) {
+      console.log('JWT Error on verification:', e);
       return null;
     }
   }

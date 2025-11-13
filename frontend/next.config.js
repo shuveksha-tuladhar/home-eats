@@ -2,8 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["home-eats-strapi.onrender.com", "127.0.0.1", 
-  "raw.githubusercontent.com"],
+    domains: [
+      "home-eats-strapi.onrender.com",
+      "127.0.0.1",
+      "raw.githubusercontent.com",
+      "cdn.pixabay.com",
+      "images.unsplash.com",
+      "i.imgur.com"
+    ],
   },
 };
 

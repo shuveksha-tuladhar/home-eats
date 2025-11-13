@@ -23,7 +23,7 @@ export default function Cart() {
     
     <button
           onClick={() => (user ? cartItemRedirect() : loginRedirect())}
-          className="z-10 bg-green-500 text-white p-3 rounded-full hover:bg-yellow-500 flex items-center"
+          className="z-10 text-primary hover:text-primary-dark p-3 rounded-full border border-primary flex items-center"
         >
           <svg
             width="20"

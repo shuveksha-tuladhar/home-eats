@@ -1,6 +1,6 @@
 .form_user_signup_image {
     background-image: linear-gradient(rgba(0, 0, 0, 0.479), rgba(0, 0, 0, 0.445)),
-      url("../../public/user-signup-image.webp");
+      url("../../public/v2/background-register.jpg");
     height: 100vh;
     background-position: bottom;
     background-repeat: no-repeat;

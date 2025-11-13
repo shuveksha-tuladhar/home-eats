@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.slick-prev:before,
+.slick-next:before {
+color: rgb(122 201 67 / var(--tw-bg-opacity)) !important; 
+font-size: 28px;
+}

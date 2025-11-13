@@ -1,0 +1,300 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Address {
+  address: String!
+  city: String!
+  state: String!
+  zipCode: String!
+  isPrimary: Boolean!
+}
+
+type User {
+  _id: ID!
+  firstName: String!
+  middleName: String
+  lastName: String!
+  username: String!
+  email: String!
+  phoneNumber: String!
+  addresses: [Address!]!
+  isActive: Boolean!
+  role: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UserResponseDto {
+  jwt: String!
+  username: String!
+  email: String!
+}
+
+type LoggedUserDto {
+  _id: String!
+  username: String!
+  email: String!
+}
+
+type OpeningHour {
+  day: String!
+  open: String!
+  close: String!
+}
+
+type Review {
+  _id: ID!
+  rating: Int!
+  comment: String
+  user: ID!
+  username: String!
+  commentedAt: DateTime!
+  isFlagged: Boolean!
+  isApproved: Boolean!
+}
+
+type Dish {
+  _id: ID!
+  name: String!
+  description: String
+  price: Float!
+  imageUrls: [String!]!
+  isActive: Boolean!
+  categories: [String!]!
+  sides: [String!]!
+}
+
+type Restaurant {
+  _id: ID!
+  name: String!
+  description: String
+  imageUrls: [String!]!
+  owner: ID!
+  phoneNumber: String
+  address: String
+  city: String
+  state: String
+  zipCode: String
+  latitude: Float
+  longitude: Float
+  openingHours: [OpeningHour!]!
+  menu: [Dish!]!
+  reviews: [Review!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type OrderedDish {
+  _id: ID
+  dishId: String!
+  name: String!
+  price: Float!
+  quantity: Float!
+}
+
+type Order {
+  _id: ID!
+  address: String!
+  city: String!
+  state: String!
+  amount: Float!
+  paymentToken: String!
+  dishes: [OrderedDish!]!
+  userId: ID!
+  restaurantId: ID!
+  status: OrderStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Current status of the order"""
+enum OrderStatus {
+  ACCEPTED
+  PREPARING
+  ON_ITS_WAY
+  DELIVERED
+}
+
+type UserDetails {
+  _id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  address: String!
+  city: String!
+  state: String!
+  zipcode: String!
+}
+
+type RestaurantDetails {
+  _id: ID!
+  name: String!
+  address: String!
+  city: String!
+  state: String!
+  zipcode: String!
+  phoneNumber: String!
+  latitude: Float!
+  longitude: Float!
+  openingHours: String!
+  imageUrl: String
+}
+
+type DishDetails {
+  _id: ID!
+  name: String!
+  price: Float!
+  quantity: Float!
+  imageUrl: String
+}
+
+type OrderResponse {
+  _id: ID!
+  address: String!
+  city: String!
+  state: String!
+  amount: Float!
+  paymentToken: String!
+  status: String!
+  orderDate: DateTime!
+  user: UserDetails!
+  restaurant: RestaurantDetails!
+  dishes: [DishDetails!]!
+}
+
+type Query {
+  me: LoggedUserDto!
+  restaurants: [Restaurant!]!
+  restaurant(id: String!): Restaurant!
+  findAllOrders: [Order!]!
+  findOneOrder(id: String!): Order!
+  findOrdersByUser(userId: String!): [Order!]!
+  findOrdersByRestaurant(restaurantId: String!): [Order!]!
+  orderDetails(id: String!): OrderResponse!
+}
+
+type Mutation {
+  updateUser(input: UpdateUserInput!): User!
+  login(identifier: String!, password: String!): UserResponseDto!
+  register(input: CreateUserInput!): UserResponseDto!
+  createRestaurant(input: CreateRestaurantInput!): Restaurant!
+  updateRestaurant(input: UpdateRestaurantInput!): Restaurant!
+  removeRestaurant(id: String!): Restaurant!
+  createOrder(input: CreateOrderInput!): Order!
+}
+
+input UpdateUserInput {
+  firstName: String
+  middleName: String
+  lastName: String
+  username: String
+  email: String
+  phoneNumber: String
+  addresses: [AddressInput!]
+  _id: ID!
+}
+
+input AddressInput {
+  address: String!
+  city: String!
+  state: String!
+  zipCode: String!
+  isPrimary: Boolean! = false
+}
+
+input CreateUserInput {
+  firstName: String!
+  middleName: String
+  lastName: String!
+  username: String!
+  email: String!
+  password: String!
+  phoneNumber: String!
+  addresses: [AddressInput!]
+}
+
+input CreateRestaurantInput {
+  name: String!
+  description: String
+  imageUrls: [String!]
+  owner: ID!
+  phoneNumber: String
+  address: String
+  city: String
+  state: String
+  zipCode: String
+  latitude: Float
+  longitude: Float
+  openingHours: [OpeningHourInput!]
+  menu: [DishInput!]
+  reviews: [ReviewInput!]
+}
+
+input OpeningHourInput {
+  day: String!
+  open: String!
+  close: String!
+}
+
+input DishInput {
+  _id: ID
+  name: String!
+  description: String
+  price: Float!
+  imageUrls: [String!]
+  isActive: Boolean
+  categories: [String!]
+  sides: [String!]
+  rating: Float
+  reviews: [ReviewInput!]
+}
+
+input ReviewInput {
+  _id: ID
+  rating: Float!
+  comment: String
+  user: ID!
+  username: String!
+}
+
+input UpdateRestaurantInput {
+  name: String
+  description: String
+  imageUrls: [String!]
+  phoneNumber: String
+  address: String
+  city: String
+  state: String
+  zipCode: String
+  latitude: Float
+  longitude: Float
+  openingHours: [OpeningHourInput!]
+  menu: [DishInput!]
+  reviews: [ReviewInput!]
+  _id: ID!
+}
+
+input CreateOrderInput {
+  address: String!
+  city: String!
+  state: String!
+  amount: Float!
+  paymentToken: String!
+  dishes: [OrderedDishInput!]!
+  userId: ID!
+  restaurantId: ID!
+  status: OrderStatus
+}
+
+input OrderedDishInput {
+  dishId: ID!
+  name: String!
+  price: Float!
+  quantity: Float!
+}

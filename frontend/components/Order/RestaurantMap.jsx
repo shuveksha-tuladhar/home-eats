@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export default function RestaurantMap({ restaurant }) {
   // Build full address string
@@ -15,7 +16,7 @@ export default function RestaurantMap({ restaurant }) {
       <div className="flex flex-row items-start gap-4 mb-6 border-b border-gray-200 pb-4">
         {restaurant?.imageUrls && restaurant?.imageUrls[0] && (
           <div className="flex-shrink-0">
-            <img
+            <Image
               src={restaurant.imageUrls[0]}
               alt={restaurant.name}
               className="rounded-xl object-cover w-20 h-20"

@@ -1,5 +1,6 @@
 import { useAppContext } from "@/context/AppContext";
 import { useInitialRender } from "@/utils/useInitialRender";
+import Image from "next/image";
 
 export default function CartItem(props) {
   const { data, restaurant } = props;
@@ -13,7 +14,7 @@ export default function CartItem(props) {
   return (
     <div className="py-4 flex flex-wrap justify-between border-b border-blueGray-800 items-center">
       <div className="w-1/6 flex justify-center items-center">
-        <img
+        <Image
           src={imgSrc}
           alt={name}
           className="w-16 h-16 object-cover rounded"

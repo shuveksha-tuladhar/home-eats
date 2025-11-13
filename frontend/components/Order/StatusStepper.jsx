@@ -1,10 +1,14 @@
 import React from "react";
+import { FcAcceptDatabase } from "react-icons/fc";
+import { FcAutomotive } from "react-icons/fc";
+import { FcCheckmark } from "react-icons/fc";
+import { LuCookingPot } from "react-icons/lu";
 
-const statusSteps = [
-  { label: "ACCEPTED", key: "accepted", icon: "📝" },
-  { label: "PREPARING", key: "preparing", icon: "📦" },
-  { label: "ON ITS WAY", key: "on its way", icon: "🚗" },
-  { label: "DELIVERED", key: "delivered", icon: "✓" },
+export const statusSteps = [
+  { label: "ACCEPTED", key: "ACCEPTED", icon: <FcAcceptDatabase />},
+  { label: "PREPARING", key: "PREPARING", icon: <LuCookingPot /> },
+  { label: "ON ITS WAY", key: "ON_ITS_WAY", icon: <FcAutomotive /> },
+  { label: "DELIVERED", key: "DELIVERED", icon: <FcCheckmark /> },
 ];
 
 function StatusStepper({ currentStatus }) {
@@ -23,7 +27,6 @@ function StatusStepper({ currentStatus }) {
             return (
               <React.Fragment key={step.key}>
                 <div className="flex flex-col items-center gap-4 text-center relative">
-                  {/* Circle with icon */}
                   <div
                     className={`
                       w-[100px] h-[100px] sm:w-[112px] sm:h-[112px] 
@@ -49,7 +52,6 @@ function StatusStepper({ currentStatus }) {
                     </span>
                   </div>
 
-                  {/* Label */}
                   <div className="flex flex-col gap-1">
                     <h3
                       className={`
@@ -68,7 +70,6 @@ function StatusStepper({ currentStatus }) {
                   </div>
                 </div>
 
-                {/* Connector line between circles */}
                 {idx < statusSteps.length - 1 && (
                   <div
                     className={`

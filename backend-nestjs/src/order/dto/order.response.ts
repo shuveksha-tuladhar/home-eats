@@ -47,6 +47,9 @@ export class RestaurantDetails {
   @Field()
   zipcode: string;
 
+  @Field()
+  phoneNumber: string;
+
   @Field(() => Float)
   latitude: number;
 

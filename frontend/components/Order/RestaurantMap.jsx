@@ -30,10 +30,10 @@ export default function RestaurantMap({ restaurant }) {
             {restaurant.address && <div>{restaurant.address}</div>}
             {restaurant.city &&
               restaurant.state &&
-              restaurant.zipCode && (
+              restaurant.zipcode && (
                 <div>
                   {restaurant.city}, {restaurant.state}{" "}
-                  {restaurant.zipCode}
+                  {restaurant.zipcode}
                 </div>
               )}
             {restaurant.phoneNumber && (

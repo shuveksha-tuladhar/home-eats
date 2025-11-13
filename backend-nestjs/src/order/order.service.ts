@@ -115,6 +115,7 @@ export class OrderService {
           city: restaurant.city,
           state: restaurant.state,
           zipcode: restaurant.zipCode,
+          phoneNumber: restaurant.phoneNumber,
           latitude: restaurant.latitude,
           longitude: restaurant.longitude,
           openingHours: this.computeOpeningHours(restaurant.openingHours),

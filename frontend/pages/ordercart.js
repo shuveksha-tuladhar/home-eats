@@ -30,7 +30,17 @@ export default function OrderCart({ loginRedirect }) {
         <div className="w-full max-w-2xl bg-white bg-opacity-95 rounded-xl shadow-lg p-6 sm:p-8 flex flex-col md:flex-row gap-8">
           <div className="flex-1">
             {cart.items.length > 0 ? (
-              <div className="flex flex-row items-start gap-4 mb-6 border-b border-gray-200 pb-4">
+              <div
+                className="flex flex-row items-start gap-4 mb-6 border-b border-gray-200 pb-4 cursor-pointer hover:bg-gray-100 transition"
+                onClick={() => router.push(`/restaurant/${cart.restaurant._id}`)}
+                role="button"
+                tabIndex={0}
+                onKeyPress={e => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    router.push(`/restaurant/${cart.restaurant.id}`);
+                  }
+                }}
+              >
                 {cart.restaurant?.imageUrls &&
                   cart.restaurant?.imageUrls[0] && (
                     <div className="flex-shrink-0">

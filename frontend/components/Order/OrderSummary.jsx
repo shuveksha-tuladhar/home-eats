@@ -1,12 +1,8 @@
 import React from "react";
-import { centsToDollars } from "@/utils/centsToDollars";
 
 function OrderSummary({ order }) {
   const calculateDishPrice = (dish) => {
-    const menuItem = order.restaurant.menu.find(
-      (item) => item.name === dish.name
-    );
-    return menuItem ? menuItem.price * dish.quantity : 0;
+    return dish.price * dish.quantity;
   };
 
   const subtotal = order.dishes.reduce(
@@ -17,7 +13,7 @@ function OrderSummary({ order }) {
   const total = subtotal + deliveryFee;
 
   // Format date
-  const orderDate = new Date(order.createdAt || Date.now());
+  const orderDate = new Date(order.orderDate);
   const formattedDate = orderDate.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -46,7 +42,7 @@ function OrderSummary({ order }) {
             />
           </svg>
           <span className="font-semibold text-sm uppercase">
-            {order.status || "Confirmed"}
+            {order.status.replaceAll("_", " ")}
           </span>
         </div>
       </div>
@@ -140,9 +136,6 @@ function OrderSummary({ order }) {
         </h3>
         <div className="space-y-3">
           {order.dishes.map((dish, idx) => {
-            const menuItem = order.restaurant.menu.find(
-              (item) => item.name === dish.name
-            );
             const dishPrice = calculateDishPrice(dish);
 
             return (
@@ -152,7 +145,7 @@ function OrderSummary({ order }) {
               >
                 <div className="flex-shrink-0">
                   <img
-                    src={menuItem?.imageUrls?.[0] || "/placeholder-dish.png"}
+                    src={dish.imageUrl || "/placeholder-dish.png"}
                     alt={dish.name}
                     className="w-20 h-20 object-cover rounded-lg shadow-sm"
                   />
@@ -161,10 +154,8 @@ function OrderSummary({ order }) {
                   <h4 className="font-semibold text-lg text-gray-800 mb-1">
                     {dish.name}
                   </h4>
-                  {menuItem?.price && (
-                    <p className="text-sm text-gray-500">
-                      ${menuItem.price} each
-                    </p>
+                  {dish.price && (
+                    <p className="text-sm text-gray-500">${dish.price} each</p>
                   )}
                 </div>
                 <div className="flex items-center gap-4">
@@ -206,15 +197,21 @@ function OrderSummary({ order }) {
         <div className="space-y-3">
           <div className="flex justify-between items-center py-2">
             <span className="text-gray-600">Subtotal</span>
-            <span className="font-semibold text-gray-800">${subtotal}</span>
+            <span className="font-semibold text-gray-800">
+              ${subtotal.toFixed(2)}
+            </span>
           </div>
           <div className="flex justify-between items-center py-2">
             <span className="text-gray-600">Delivery Fee</span>
-            <span className="font-semibold text-gray-800">${deliveryFee}</span>
+            <span className="font-semibold text-gray-800">
+              ${deliveryFee.toFixed(2)}
+            </span>
           </div>
           <div className="flex justify-between items-center py-3 bg-primary/10 -mx-6 px-6 rounded-lg">
             <span className="text-lg font-bold text-gray-800">Total</span>
-            <span className="text-2xl font-bold text-primary">${total}</span>
+            <span className="text-2xl font-bold text-primary">
+              ${total.toFixed(2)}
+            </span>
           </div>
         </div>
       </div>

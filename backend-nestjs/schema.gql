@@ -115,11 +115,10 @@ type Order {
 
 """Current status of the order"""
 enum OrderStatus {
-  PENDING
   ACCEPTED
   PREPARING
-  READY
-  CANCELLED
+  ON_ITS_WAY
+  DELIVERED
 }
 
 type UserDetails {
@@ -140,6 +139,7 @@ type RestaurantDetails {
   city: String!
   state: String!
   zipcode: String!
+  phoneNumber: String!
   latitude: Float!
   longitude: Float!
   openingHours: String!

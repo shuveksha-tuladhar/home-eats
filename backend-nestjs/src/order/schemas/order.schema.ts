@@ -38,7 +38,7 @@ export class Order {
   @Prop({
     type: String,
     enum: Object.values(OrderStatusEnum),
-    default: OrderStatusEnum.PENDING,
+    default: OrderStatusEnum.ACCEPTED,
   })
   status: OrderStatusEnum;
 }

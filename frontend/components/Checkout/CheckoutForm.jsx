@@ -125,12 +125,12 @@ export default function CheckoutForm() {
             `,
             variables: {
               createOrder: {
-                amount: (cart.total + 5.99).toFixed(2),
+                amount: parseFloat((cart.total + 5.99).toFixed(2)),
                 dishes: cart.items.map((item) => ({
                   quantity: item.quantity,
                   dishId: item._id,
                   name: item.name,
-                  price: item.price.toFixed(2),
+                  price: parseFloat(item.price.toFixed(2)),
                 })),
                 address: data.address,
                 city: data.city,
@@ -138,6 +138,9 @@ export default function CheckoutForm() {
                 paymentToken: paymentMethod.id,
                 userId: "686487f6ecc1ba79c692d275",
                 restaurantId: cart.restaurant._id,
+                status: ["ACCEPTED", "PREPARING", "ON_ITS_WAY"][
+                  Math.floor(Math.random() * 3)
+                ],
               },
             },
             context: {
@@ -148,7 +151,6 @@ export default function CheckoutForm() {
           });
 
           if (response.createOrder) {
-            alert("Transaction Successful, continue your shopping");
             setData(INITIAL_STATE);
             resetCart();
             router.push("/status/" + response.createOrder._id);

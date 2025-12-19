@@ -170,8 +170,10 @@ type OrderResponse {
 
 type Query {
   me: LoggedUserDto!
+  userProfile(id: String, username: String): User
   restaurants: [Restaurant!]!
   restaurant(id: String!): Restaurant!
+  restaurantsByLocation(location: String!): [Restaurant!]!
   findAllOrders: [Order!]!
   findOneOrder(id: String!): Order!
   findOrdersByUser(userId: String!): [Order!]!

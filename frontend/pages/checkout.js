@@ -13,7 +13,7 @@ export default function Checkout() {
   if (!initialRender) return null;
 
   return (
-    <section className="container mx-auto py-24">
+    <section className="min-h-screen container mx-auto py-24">
       <div className="grid grid-cols-5 gap-4">
         <div className="col-span-2">
           <CheckoutCart />

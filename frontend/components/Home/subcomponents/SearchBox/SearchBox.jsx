@@ -1,8 +1,10 @@
 import { FaSearch, FaShippingFast } from "react-icons/fa";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import cities from "./usCities.json"; // Assume this is an array of { city, state } objects
 
 const SearchBox = ({ query, setQuery }) => {
+  const router = useRouter();
   const [location, setLocation] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -38,10 +40,14 @@ const handleSubmit = (e) => {
         return;
     }
     setShowLocationError(false);
-    // You can add further submit logic here if needed
-};
-
-return (
+    
+    const params = new URLSearchParams();
+    params.append('location', location);
+    if (query && query.trim()) {
+        params.append('query', query);
+    }
+    router.push(`/search?${params.toString()}`);
+};return (
     <div className="bg-white rounded-2xl shadow-highlight overflow-hidden max-w-full sm:max-w-[800px]">
         <div className="p-4 sm:p-6">
             <div className="flex items-center gap-4 justify-between">

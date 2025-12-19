@@ -59,4 +59,17 @@ export class RestaurantService {
     }
     return deletedRestaurant;
   }
+
+  async findByLocation(location: string): Promise<RestaurantDocument[]> {
+    if (!location || !location.trim()) {
+      return this.restaurantModel.find().exec();
+    }
+    const parts = location.split(',').map((part) => part.trim());
+    const query: any = {};
+
+    query.city = parts[0];
+    query.state = parts[1];
+
+    return this.restaurantModel.find(query).exec();
+  }
 }

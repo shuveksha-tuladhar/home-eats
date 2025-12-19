@@ -66,4 +66,38 @@ export class UserResolver {
       email: user.email,
     };
   }
+
+  @Query(() => User, { nullable: true })
+  async userProfile(
+    @Args('id', { nullable: true }) id?: string,
+    @Args('username', { nullable: true }) username?: string,
+    @Context() context?: any,
+  ): Promise<User | null> {
+    // If no id or username provided, get from context (authenticated user)
+    if (!id && !username) {
+      const authHeader = context?.req?.headers?.authorization;
+      if (!authHeader) {
+        throw new Error('Authorization header missing');
+      }
+      const token = authHeader.replace('Bearer ', '');
+      const payload = await this.userService.verifyJwt(token);
+      if (!payload || !payload.email) {
+        throw new Error('Invalid or expired token');
+      }
+      const user = await this.userService.findOneByEmail(payload.email);
+      return user;
+    }
+
+    // Find by id if provided
+    if (id) {
+      return this.userService.findOneById(id);
+    }
+
+    // Find by username if provided
+    if (username) {
+      return this.userService.findOneByUsername(username);
+    }
+
+    return null;
+  }
 }

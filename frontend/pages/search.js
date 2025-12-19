@@ -65,11 +65,13 @@ export default function SearchPage() {
           </h1>
           {location && (
             <p className="text-lg text-gray-600">
-              Showing restaurants in <span className="font-semibold">{location}</span>
+              Showing restaurants in{" "}
+              <span className="font-semibold">{location}</span>
               {searchQuery && (
                 <span>
                   {" "}
-                  matching "<span className="font-semibold">{searchQuery}</span>"
+                  matching &quot;<span className="font-semibold">{searchQuery}</span>
+                  &quot;
                 </span>
               )}
             </p>

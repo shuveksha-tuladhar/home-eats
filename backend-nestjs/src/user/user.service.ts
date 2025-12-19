@@ -30,6 +30,10 @@ export class UserService {
     return this.userModel.findOne({ email }).exec();
   }
 
+  async findOneByUsername(username: string): Promise<UserDocument | null> {
+    return this.userModel.findOne({ username }).exec();
+  }
+
   async update(input: UpdateUserInput): Promise<UserDocument | null> {
     const { _id, ...updateData } = input;
 

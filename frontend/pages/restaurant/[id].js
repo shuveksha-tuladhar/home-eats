@@ -40,19 +40,19 @@ export default function Restaurant() {
     const { restaurant } = data;
 
     return (
-      <div className="py-6 max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-green-600 mb-4">
-          {restaurant.name}
-        </h1>
-        <div className="pb-16 bg-white rounded-3xl">
-          <div className="flex flex-wrap -m-4 mb-6">
-            {restaurant.dishes.map((dish) => {
-              return (
-                <DishCard key={dish._id} restaurant={restaurant} data={dish} />
-              );
-            })}
-          </div>
+      <div className="py-6 max-w-7xl mx-auto min-h-screen">
+      <h1 className="text-4xl font-bold text-green-600 mb-4">
+        {restaurant.name}
+      </h1>
+      <div className="pb-16 bg-white rounded-3xl">
+        <div className="flex flex-wrap -m-4 mb-6">
+        {restaurant.dishes.map((dish) => {
+          return (
+          <DishCard key={dish._id} restaurant={restaurant} data={dish} />
+          );
+        })}
         </div>
+      </div>
       </div>
     );
   } else {

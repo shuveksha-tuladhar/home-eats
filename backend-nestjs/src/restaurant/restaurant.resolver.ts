@@ -25,6 +25,13 @@ export class RestaurantResolver {
     return this.restaurantService.findOne(id);
   }
 
+  @Query(() => [Restaurant], { name: 'restaurantsByLocation' })
+  async findRestaurantsByLocation(
+    @Args('location') location: string,
+  ): Promise<Restaurant[]> {
+    return this.restaurantService.findByLocation(location);
+  }
+
   @Mutation(() => Restaurant)
   async updateRestaurant(
     @Args('input') updateRestaurantInput: UpdateRestaurantInput,

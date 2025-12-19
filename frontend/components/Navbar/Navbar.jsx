@@ -65,7 +65,9 @@ export default function Navbar() {
         ) : (
           <li className="flex items-center gap-2">
             <Cart />
-            <FaUserCircle className="text-[#555] text-2xl" />
+            <Link href="/profile">
+              <FaUserCircle className="text-[#555] text-2xl cursor-pointer hover:text-primary transition" />
+            </Link>
             <button
               onClick={handleSignOut}
               className="text-black font-semibold px-4 py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition"
